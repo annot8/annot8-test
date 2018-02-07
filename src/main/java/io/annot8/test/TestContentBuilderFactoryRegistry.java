@@ -21,7 +21,6 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
       try {
         return Optional.of(new TestContentBuilderFactory(contentClass));
       } catch (Exception e) {
-        // TODO: log
         e.printStackTrace();
       }
     }
