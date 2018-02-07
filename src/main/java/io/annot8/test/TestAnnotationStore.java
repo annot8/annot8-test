@@ -18,7 +18,7 @@ public class TestAnnotationStore implements AnnotationStore {
   private final AnnotationBuilderFactory<Annotation> annotationBuilderFactory;
 
   public TestAnnotationStore() {
-    this(TestConstants.TEST_CONTENT);
+    this(TestConstants.CONTENT_NAME);
   }
 
   public TestAnnotationStore(String contentName) {

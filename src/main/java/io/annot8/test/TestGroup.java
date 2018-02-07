@@ -1,9 +1,9 @@
 package io.annot8.test;
 
-import io.annot8.common.references.AnnotationReference;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.properties.ImmutableProperties;
+import io.annot8.core.references.AnnotationReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -40,17 +40,12 @@ public class TestGroup implements Group {
   }
 
   @Override
-  public Map<String, Stream<Annotation>> getAnnotations() {
-    Map<String, Stream<Annotation>> ret = new HashMap<>();
+  public Map<String, Stream<AnnotationReference>> getReferences() {
+    Map<String, Stream<AnnotationReference>> ret = new HashMap<>();
 
     annotations.forEach((key, value) -> {
-      Stream<Annotation> s = ret.getOrDefault(value, Stream.empty());
-
-      Optional<Annotation> optional = key.toAnnotation();
-
-      if (optional.isPresent()) {
-        ret.put(value, Stream.concat(s, Stream.of(optional.get())));
-      }
+      Stream<AnnotationReference> s = ret.getOrDefault(value, Stream.empty());
+      ret.put(value, Stream.concat(s, Stream.of(key)));
     });
 
     return ret;
@@ -60,7 +55,6 @@ public class TestGroup implements Group {
       Map<AnnotationReference, String> annotations) {
     this.annotations = annotations;
   }
-
 
   @Override
   public Optional<String> getRole(Annotation annotation) {

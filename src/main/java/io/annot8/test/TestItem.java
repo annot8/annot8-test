@@ -18,10 +18,10 @@ import java.util.stream.Stream;
 
 public class TestItem implements Item {
 
-  private final MutableProperties properties;
-  private final GroupStore groupStore;
-  private final ContentBuilderFactoryRegistry contentBuilderFactoryRegistry;
-  private final Map<String, Content<?>> content = new HashMap<>();
+  private MutableProperties properties;
+  private GroupStore groups;
+  private ContentBuilderFactoryRegistry contentBuilderFactoryRegistry;
+  private Map<String, Content<?>> content = new HashMap<>();
 
   public TestItem() {
     this(new TestGroupStore());
@@ -34,7 +34,7 @@ public class TestItem implements Item {
   public TestItem(GroupStore groupStore,
       ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {
     this.properties = new TestProperties();
-    this.groupStore = groupStore;
+    this.groups = groupStore;
     this.contentBuilderFactoryRegistry = contentBuilderFactoryRegistry;
   }
 
@@ -88,7 +88,7 @@ public class TestItem implements Item {
     return save(c);
   }
 
-  private <D, C extends Content<D>> C save(C c) {
+  public <D, C extends Content<D>> C save(C c) {
     content.put(c.getName(), c);
     return c;
   }
@@ -100,7 +100,7 @@ public class TestItem implements Item {
 
   @Override
   public GroupStore getGroups() {
-    return groupStore;
+    return groups;
   }
 
   @Override
@@ -108,4 +108,28 @@ public class TestItem implements Item {
     return properties;
   }
 
+  public void setGroups(GroupStore groups) {
+    this.groups = groups;
+  }
+
+  public void setProperties(MutableProperties properties) {
+    this.properties = properties;
+  }
+
+  public ContentBuilderFactoryRegistry getContentBuilderFactoryRegistry() {
+    return contentBuilderFactoryRegistry;
+  }
+
+  public void setContentBuilderFactoryRegistry(
+      ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {
+    this.contentBuilderFactoryRegistry = contentBuilderFactoryRegistry;
+  }
+
+  public Map<String, Content<?>> getContent() {
+    return content;
+  }
+
+  public void setContent(Map<String, Content<?>> content) {
+    this.content = content;
+  }
 }

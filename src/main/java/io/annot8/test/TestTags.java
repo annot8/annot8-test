@@ -22,7 +22,7 @@ public class TestTags implements Tags {
     tags.remove(tag);
   }
 
-  public void clear(String tag) {
+  public void clear() {
     tags.clear();
   }
 }

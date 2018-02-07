@@ -16,7 +16,7 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   private D data;
 
   public AbstractTestContent(Class<D> dataClass) {
-    this(dataClass, TestConstants.TEST_CONTENT);
+    this(dataClass, TestConstants.CONTENT_NAME);
   }
 
   public AbstractTestContent(Class<D> dataClass, String name) {

@@ -1,7 +1,7 @@
 package io.annot8.test;
 
-import io.annot8.common.references.AnnotationReference;
 import io.annot8.core.annotations.Annotation;
+import io.annot8.core.references.AnnotationReference;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -12,6 +12,16 @@ public class TestAnnotationReference implements AnnotationReference {
   public TestAnnotationReference(Annotation annotation) {
     assert annotation != null;
     this.annotation = annotation;
+  }
+
+  @Override
+  public String getAnnotationId() {
+    return annotation.getId();
+  }
+
+  @Override
+  public String getContent() {
+    return annotation.getContentName();
   }
 
   @Override

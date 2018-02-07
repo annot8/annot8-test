@@ -9,6 +9,7 @@ import io.annot8.core.data.Item;
 import io.annot8.core.data.Tags;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.Properties;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryRegistry {
@@ -35,7 +36,8 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     private final Class<C> contentClass;
 
 
-    public TestContentBuilderFactory(Class<C> contentClass) throws Exception {
+    public TestContentBuilderFactory(Class<C> contentClass)
+        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
       this.contentClass = contentClass;
       instance = contentClass.getConstructor().newInstance();
 

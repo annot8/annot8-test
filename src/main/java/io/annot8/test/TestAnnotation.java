@@ -22,7 +22,7 @@ public class TestAnnotation implements Annotation {
   private String type;
 
   public TestAnnotation() {
-    this(UUID.randomUUID().toString(), TestConstants.TEST_CONTENT);
+    this(UUID.randomUUID().toString(), TestConstants.CONTENT_NAME);
   }
 
   public TestAnnotation(String id, String content) {
