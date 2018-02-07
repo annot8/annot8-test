@@ -23,8 +23,6 @@ public class TestItem implements Item {
   private final ContentBuilderFactoryRegistry contentBuilderFactoryRegistry;
   private final Map<String, Content<?>> content = new HashMap<>();
 
-  private String defaultContent;
-
   public TestItem() {
     this(new TestGroupStore());
   }
@@ -38,16 +36,6 @@ public class TestItem implements Item {
     this.properties = new TestProperties();
     this.groupStore = groupStore;
     this.contentBuilderFactoryRegistry = contentBuilderFactoryRegistry;
-  }
-
-  @Override
-  public Content<?> getDefaultContent() {
-    return content.get(defaultContent);
-  }
-
-  @Override
-  public void setDefaultContent(String name) {
-    this.defaultContent = name;
   }
 
   @Override
