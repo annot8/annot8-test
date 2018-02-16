@@ -7,6 +7,7 @@ import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
 import io.annot8.core.exceptions.AlreadyExistsException;
+import io.annot8.core.exceptions.Annot8RuntimeException;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.exceptions.UnsupportedContentException;
 import io.annot8.core.properties.MutableProperties;
@@ -96,6 +97,12 @@ public class TestItem implements Item {
   @Override
   public void removeContent(String name) {
     content.remove(name);
+  }
+
+  @Override
+  public Item createChildItem() {
+    //TODO: Implement this
+    throw new Annot8RuntimeException("Not currently implemented");
   }
 
   @Override

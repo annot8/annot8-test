@@ -97,6 +97,22 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     }
 
     @Override
+    public Builder<C, D> withoutProperty(String key, Object value) {
+      Optional<Object> opt = builderProperties.get(key);
+      if(opt.isPresent() && opt.get().equals(value))
+        builderProperties.remove(key);
+
+      return this;
+    }
+
+    @Override
+    public Builder<C, D> withoutProperty(String key) {
+      builderProperties.remove(key);
+
+      return this;
+    }
+
+    @Override
     public Builder<C, D> withProperties(Properties properties) {
       builderProperties.add(properties.getAll());
       return this;
@@ -116,8 +132,20 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     }
 
     @Override
+    public Builder<C, D> withoutTag(String tag) {
+      this.tags.remove(tag);
+      return this;
+    }
+
+    @Override
     public Builder<C, D> withTags(Tags tags) {
       tags.get().forEach(this.tags::add);
+      return this;
+    }
+
+    @Override
+    public Builder<C, D> withoutTags(Tags tags) {
+      tags.get().forEach(this.tags::remove);
       return this;
     }
   }

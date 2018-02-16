@@ -10,6 +10,7 @@ import io.annot8.core.properties.Properties;
 import io.annot8.core.references.AnnotationReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 public class TestGroupBuilder implements Group.Builder {
@@ -63,6 +64,21 @@ public class TestGroupBuilder implements Group.Builder {
   @Override
   public Builder withProperty(String key, Object value) {
     this.properties.set(key, value);
+    return this;
+  }
+
+  @Override
+  public Builder withoutProperty(String key, Object value) {
+    Optional<Object> opt = this.properties.get(key);
+    if(opt.isPresent() && opt.get().equals(value))
+      this.properties.remove(key);
+
+    return this;
+  }
+
+  @Override
+  public Builder withoutProperty(String key) {
+    this.properties.remove(key);
     return this;
   }
 
