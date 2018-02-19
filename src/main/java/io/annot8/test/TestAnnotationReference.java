@@ -20,7 +20,7 @@ public class TestAnnotationReference implements AnnotationReference {
   }
 
   @Override
-  public String getContent() {
+  public String getContentName() {
     return annotation.getContentName();
   }
 
