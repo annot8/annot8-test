@@ -2,7 +2,7 @@ package io.annot8.test;
 
 import io.annot8.common.factories.ContentBuilderFactory;
 import io.annot8.common.registries.ContentBuilderFactoryRegistry;
-import io.annot8.common.stores.SaveFromBuilder;
+import io.annot8.common.stores.SaveCallback;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
@@ -43,7 +43,7 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     }
 
     @Override
-    public Content.Builder<C, D> create(Item item, SaveFromBuilder<C, C> saver) {
+    public Content.Builder<C, D> create(Item item, SaveCallback<C, C> saver) {
       return new TestContentBuilder(instance, saver);
     }
 
@@ -63,11 +63,11 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
       Content.Builder<C, D> {
 
     private final C instance;
-    private final SaveFromBuilder<C, C> saver;
+    private final SaveCallback<C, C> saver;
     private final TestProperties builderProperties = new TestProperties();
     private final TestTags tags = new TestTags();
 
-    public TestContentBuilder(C instance, SaveFromBuilder<C, C> saver) {
+    public TestContentBuilder(C instance, SaveCallback<C, C> saver) {
       this.instance = instance;
       this.saver = saver;
     }

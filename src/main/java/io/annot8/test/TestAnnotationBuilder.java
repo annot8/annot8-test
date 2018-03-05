@@ -1,7 +1,7 @@
 package io.annot8.test;
 
 import io.annot8.common.factories.AnnotationBuilderFactory;
-import io.annot8.common.stores.SaveFromBuilder;
+import io.annot8.common.stores.SaveCallback;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Annotation.Builder;
 import io.annot8.core.bounds.Bounds;
@@ -14,13 +14,13 @@ import java.util.UUID;
 public class TestAnnotationBuilder implements Annotation.Builder {
 
   private final MutableProperties properties = new TestProperties();
-  private final SaveFromBuilder<Annotation, Annotation> saver;
+  private final SaveCallback<Annotation, Annotation> saver;
   private String contentName;
   private Bounds bounds;
   private String id;
   private String type;
 
-  public TestAnnotationBuilder(String content, SaveFromBuilder<Annotation, Annotation> saver) {
+  public TestAnnotationBuilder(String content, SaveCallback<Annotation, Annotation> saver) {
     this.contentName = content;
     this.saver = saver;
   }

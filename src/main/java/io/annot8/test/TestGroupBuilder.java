@@ -1,7 +1,7 @@
 package io.annot8.test;
 
 import io.annot8.common.factories.GroupBuilderFactory;
-import io.annot8.common.stores.SaveFromBuilder;
+import io.annot8.common.stores.SaveCallback;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.annotations.Group.Builder;
@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class TestGroupBuilder implements Group.Builder {
 
-  private final SaveFromBuilder<Group, Group> saver;
+  private final SaveCallback<Group, Group> saver;
 
   private final Map<AnnotationReference, String> annotations = new HashMap<>();
   private final TestProperties properties = new TestProperties();
@@ -23,7 +23,7 @@ public class TestGroupBuilder implements Group.Builder {
   private String type = TestConstants.GROUP_TYPE;
 
 
-  public TestGroupBuilder(SaveFromBuilder<Group, Group> saver) {
+  public TestGroupBuilder(SaveCallback<Group, Group> saver) {
     this.saver = saver;
   }
 
