@@ -6,8 +6,8 @@ import io.annot8.common.utils.StreamUtils;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
+import io.annot8.core.data.ItemFactory;
 import io.annot8.core.exceptions.AlreadyExistsException;
-import io.annot8.core.exceptions.Annot8RuntimeException;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.exceptions.UnsupportedContentException;
 import io.annot8.core.properties.MutableProperties;
@@ -19,21 +19,29 @@ import java.util.stream.Stream;
 
 public class TestItem implements Item {
 
+  private final ItemFactory itemFactory;
   private MutableProperties properties;
   private GroupStore groups;
   private ContentBuilderFactoryRegistry contentBuilderFactoryRegistry;
   private Map<String, Content<?>> content = new HashMap<>();
 
+  private boolean discarded = false;
+
   public TestItem() {
-    this(new TestGroupStore());
+    this(null, new TestGroupStore());
   }
 
-  public TestItem(GroupStore groupStore) {
-    this(groupStore, new TestContentBuilderFactoryRegistry());
+  public TestItem(ItemFactory itemFactory) {
+    this(itemFactory, new TestGroupStore());
   }
 
-  public TestItem(GroupStore groupStore,
+  public TestItem(ItemFactory itemFactory, GroupStore groupStore) {
+    this(itemFactory, groupStore, new TestContentBuilderFactoryRegistry());
+  }
+
+  public TestItem(ItemFactory itemFactory, GroupStore groupStore,
       ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {
+    this.itemFactory = itemFactory;
     this.properties = new TestProperties();
     this.groups = groupStore;
     this.contentBuilderFactoryRegistry = contentBuilderFactoryRegistry;
@@ -100,12 +108,6 @@ public class TestItem implements Item {
   }
 
   @Override
-  public Item createChildItem() {
-    //TODO: Implement this
-    throw new Annot8RuntimeException("Not currently implemented");
-  }
-
-  @Override
   public GroupStore getGroups() {
     return groups;
   }
@@ -138,5 +140,23 @@ public class TestItem implements Item {
 
   public void setContent(Map<String, Content<?>> content) {
     this.content = content;
+  }
+
+  @Override
+  public Item createChildItem() {
+    if (itemFactory == null) {
+      throw new UnsupportedOperationException();
+    }
+    return itemFactory.create(this);
+  }
+
+  @Override
+  public void discard() {
+    discarded = true;
+  }
+
+  @Override
+  public boolean isDiscarded() {
+    return discarded;
   }
 }
