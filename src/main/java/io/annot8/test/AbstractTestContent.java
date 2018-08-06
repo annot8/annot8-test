@@ -1,5 +1,6 @@
 package io.annot8.test;
 
+import java.util.UUID;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Tags;
 import io.annot8.core.properties.ImmutableProperties;
@@ -7,6 +8,7 @@ import io.annot8.core.stores.AnnotationStore;
 
 public abstract class AbstractTestContent<D> implements Content<D> {
 
+  private final String id;
   private final Class<D> dataClass;
   private String name;
   private ImmutableProperties properties;
@@ -20,11 +22,17 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   }
 
   public AbstractTestContent(Class<D> dataClass, String name) {
+    this.id = UUID.randomUUID().toString();
     this.dataClass = dataClass;
     this.name = name;
     this.annotations = new TestAnnotationStore();
     this.tags = new TestTags();
     this.properties = new TestProperties();
+  }
+
+  @Override
+  public String getId() {
+    return id;
   }
 
   public Class<D> getDataClass() {

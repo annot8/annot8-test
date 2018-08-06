@@ -1,5 +1,10 @@
 package io.annot8.test;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Stream;
 import io.annot8.common.factories.ContentBuilderFactory;
 import io.annot8.common.registries.ContentBuilderFactoryRegistry;
 import io.annot8.common.utils.StreamUtils;
@@ -12,13 +17,10 @@ import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.exceptions.UnsupportedContentException;
 import io.annot8.core.properties.MutableProperties;
 import io.annot8.core.stores.GroupStore;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public class TestItem implements Item {
 
+  private final String id;
   private final ItemFactory itemFactory;
   private MutableProperties properties;
   private GroupStore groups;
@@ -41,6 +43,7 @@ public class TestItem implements Item {
 
   public TestItem(ItemFactory itemFactory, GroupStore groupStore,
       ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {
+    this.id = UUID.randomUUID().toString();
     this.itemFactory = itemFactory;
     this.properties = new TestProperties();
     this.groups = groupStore;
@@ -68,10 +71,14 @@ public class TestItem implements Item {
   }
 
   @Override
+  public String getId() {
+    return id;
+  }
+
+  @Override
   public <C extends Content<D>, D> Builder<C, D> create(Class<C> clazz)
       throws UnsupportedContentException {
-    Optional<ContentBuilderFactory<D, C>> optional = contentBuilderFactoryRegistry
-        .get(clazz);
+    Optional<ContentBuilderFactory<D, C>> optional = contentBuilderFactoryRegistry.get(clazz);
 
     if (!optional.isPresent()) {
       throw new UnsupportedContentException("No content builder factory " + clazz.getSimpleName());
