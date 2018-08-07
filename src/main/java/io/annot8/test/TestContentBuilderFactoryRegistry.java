@@ -1,5 +1,7 @@
 package io.annot8.test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 import io.annot8.common.factories.ContentBuilderFactory;
 import io.annot8.common.registries.ContentBuilderFactoryRegistry;
 import io.annot8.common.stores.SaveCallback;
@@ -9,8 +11,6 @@ import io.annot8.core.data.Item;
 import io.annot8.core.data.Tags;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.Properties;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Optional;
 
 public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryRegistry {
 
@@ -28,15 +28,15 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     return Optional.empty();
   }
 
-  public static class TestContentBuilderFactory<D, C extends AbstractTestContent<D>> implements
-      ContentBuilderFactory<D, C> {
+  public static class TestContentBuilderFactory<D, C extends AbstractTestContent<D>>
+      implements ContentBuilderFactory<D, C> {
 
     private final C instance;
     private final Class<C> contentClass;
 
 
-    public TestContentBuilderFactory(Class<C> contentClass)
-        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public TestContentBuilderFactory(Class<C> contentClass) throws NoSuchMethodException,
+        IllegalAccessException, InvocationTargetException, InstantiationException {
       this.contentClass = contentClass;
       instance = contentClass.getConstructor().newInstance();
 
@@ -59,17 +59,24 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     }
   }
 
-  public static class TestContentBuilder<D, C extends AbstractTestContent<D>> implements
-      Content.Builder<C, D> {
+  public static class TestContentBuilder<D, C extends AbstractTestContent<D>>
+      implements Content.Builder<C, D> {
 
     private final C instance;
     private final SaveCallback<C, C> saver;
+    private String id;
     private final TestProperties builderProperties = new TestProperties();
     private final TestTags tags = new TestTags();
 
     public TestContentBuilder(C instance, SaveCallback<C, C> saver) {
       this.instance = instance;
       this.saver = saver;
+    }
+
+    @Override
+    public Builder<C, D> withId(String id) {
+      this.id = id;
+      return this;
     }
 
     @Override
@@ -99,7 +106,7 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     @Override
     public Builder<C, D> withoutProperty(String key, Object value) {
       Optional<Object> opt = builderProperties.get(key);
-      if(opt.isPresent() && opt.get().equals(value))
+      if (opt.isPresent() && opt.get().equals(value))
         builderProperties.remove(key);
 
       return this;
