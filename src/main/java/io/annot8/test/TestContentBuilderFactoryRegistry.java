@@ -8,7 +8,6 @@ import io.annot8.common.stores.SaveCallback;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
-import io.annot8.core.data.Tags;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.Properties;
 
@@ -66,7 +65,6 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     private final SaveCallback<C, C> saver;
     private String id;
     private final TestProperties builderProperties = new TestProperties();
-    private final TestTags tags = new TestTags();
 
     public TestContentBuilder(C instance, SaveCallback<C, C> saver) {
       this.instance = instance;
@@ -93,7 +91,7 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
 
     @Override
     public Builder<C, D> from(C from) {
-      withTags(from.getTags());
+      withProperties(from.getProperties());
       return this;
     }
 
@@ -128,32 +126,8 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     @Override
     public C save() throws IncompleteException {
       instance.setProperties(builderProperties);
-      instance.setTags(tags);
       return saver.save(instance);
     }
 
-    @Override
-    public Builder<C, D> withTag(String tag) {
-      this.tags.add(tag);
-      return this;
-    }
-
-    @Override
-    public Builder<C, D> withoutTag(String tag) {
-      this.tags.remove(tag);
-      return this;
-    }
-
-    @Override
-    public Builder<C, D> withTags(Tags tags) {
-      tags.get().forEach(this.tags::add);
-      return this;
-    }
-
-    @Override
-    public Builder<C, D> withoutTags(Tags tags) {
-      tags.get().forEach(this.tags::remove);
-      return this;
-    }
   }
 }
