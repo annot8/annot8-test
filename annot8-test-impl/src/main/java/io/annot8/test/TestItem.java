@@ -1,13 +1,13 @@
 package io.annot8.test;
 
+import io.annot8.common.implementations.factories.ContentBuilderFactory;
+import io.annot8.common.implementations.registries.ContentBuilderFactoryRegistry;
+import io.annot8.common.utils.java.StreamUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
-import io.annot8.common.factories.ContentBuilderFactory;
-import io.annot8.common.registries.ContentBuilderFactoryRegistry;
-import io.annot8.common.utils.StreamUtils;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;

@@ -1,7 +1,7 @@
 package io.annot8.test;
 
-import io.annot8.common.factories.GroupBuilderFactory;
-import io.annot8.common.stores.SaveCallback;
+import io.annot8.common.implementations.factories.GroupBuilderFactory;
+import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.annotations.Group.Builder;

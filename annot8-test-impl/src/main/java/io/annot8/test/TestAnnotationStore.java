@@ -1,6 +1,6 @@
 package io.annot8.test;
 
-import io.annot8.common.factories.AnnotationBuilderFactory;
+import io.annot8.common.implementations.factories.AnnotationBuilderFactory;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Annotation.Builder;
 import io.annot8.core.data.Content;
@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class TestAnnotationStore implements AnnotationStore {
 
   private final Map<String, Annotation> annotations = new HashMap<>();
-  private final String contentName;
+  private String contentName;
   private final AnnotationBuilderFactory<Annotation> annotationBuilderFactory;
 
   public TestAnnotationStore() {
@@ -30,7 +30,6 @@ public class TestAnnotationStore implements AnnotationStore {
     this.contentName = contentName;
     this.annotationBuilderFactory = annotationBuilderFactory;
   }
-
   public TestAnnotationStore(Content<?> content) {
     this(content.getName());
   }
@@ -38,6 +37,10 @@ public class TestAnnotationStore implements AnnotationStore {
   @Override
   public Builder getBuilder() {
     return annotationBuilderFactory.create(contentName, this, this::save);
+  }
+
+  public void setContentName(String contentName) {
+    this.contentName = contentName;
   }
 
   public Annotation save(Builder annotationBuilder) throws IncompleteException {

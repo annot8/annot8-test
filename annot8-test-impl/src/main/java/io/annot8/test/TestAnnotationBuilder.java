@@ -1,9 +1,9 @@
 package io.annot8.test;
 
+import io.annot8.common.implementations.factories.AnnotationBuilderFactory;
+import io.annot8.common.implementations.stores.SaveCallback;
 import java.util.Optional;
 import java.util.UUID;
-import io.annot8.common.factories.AnnotationBuilderFactory;
-import io.annot8.common.stores.SaveCallback;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Annotation.Builder;
 import io.annot8.core.bounds.Bounds;

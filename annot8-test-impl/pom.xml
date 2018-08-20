@@ -20,15 +20,25 @@
       <groupId>io.annot8</groupId>
       <artifactId>annot8-core</artifactId>
     </dependency>
+
     <dependency>
       <groupId>io.annot8</groupId>
-      <artifactId>annot8-common-components</artifactId>
+      <artifactId>annot8-common-implementations</artifactId>
     </dependency>
-	<dependency>
-	  <groupId>org.junit.jupiter</groupId>
-	  <artifactId>junit-jupiter-api</artifactId>
-	  <scope>test</scope>
-	</dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.annot8</groupId>
+      <artifactId>annot8-common-utils</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.annot8</groupId>
+      <artifactId>annot8-common-data</artifactId>
+    </dependency>
   </dependencies>
   
 </project>

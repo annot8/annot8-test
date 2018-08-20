@@ -1,10 +1,10 @@
 package io.annot8.test;
 
+import io.annot8.common.implementations.factories.ContentBuilderFactory;
+import io.annot8.common.implementations.registries.ContentBuilderFactoryRegistry;
+import io.annot8.common.implementations.stores.SaveCallback;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
-import io.annot8.common.factories.ContentBuilderFactory;
-import io.annot8.common.registries.ContentBuilderFactoryRegistry;
-import io.annot8.common.stores.SaveCallback;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;

@@ -23,7 +23,7 @@ public abstract class AbstractTestContent<D> implements Content<D> {
     this.id = UUID.randomUUID().toString();
     this.dataClass = dataClass;
     this.name = name;
-    this.annotations = new TestAnnotationStore();
+    this.annotations = new TestAnnotationStore(name);
     this.properties = new TestProperties();
   }
 
@@ -61,6 +61,10 @@ public abstract class AbstractTestContent<D> implements Content<D> {
 
   public void setName(String name) {
     this.name = name;
+    // Update the content name in teh annotation store if we can
+    if(this.annotations instanceof TestAnnotationStore) {
+      ((TestAnnotationStore)annotations).setContentName(name);
+    }
   }
 
   @Override

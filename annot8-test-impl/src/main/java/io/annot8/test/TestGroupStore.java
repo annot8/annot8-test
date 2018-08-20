@@ -1,6 +1,6 @@
 package io.annot8.test;
 
-import io.annot8.common.factories.GroupBuilderFactory;
+import io.annot8.common.implementations.factories.GroupBuilderFactory;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.annotations.Group.Builder;
 import io.annot8.core.data.Item;
