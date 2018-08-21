@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 public class TestAnnotationStore implements AnnotationStore {
 
   private final Map<String, Annotation> annotations = new HashMap<>();
-  private String contentName;
   private final AnnotationBuilderFactory<Annotation> annotationBuilderFactory;
+  private String contentName;
 
   public TestAnnotationStore() {
     this(TestConstants.CONTENT_NAME);
@@ -30,6 +30,7 @@ public class TestAnnotationStore implements AnnotationStore {
     this.contentName = contentName;
     this.annotationBuilderFactory = annotationBuilderFactory;
   }
+
   public TestAnnotationStore(Content<?> content) {
     this(content.getName());
   }

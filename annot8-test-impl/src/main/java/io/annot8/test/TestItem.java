@@ -3,11 +3,6 @@ package io.annot8.test;
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.ContentBuilderFactoryRegistry;
 import io.annot8.common.utils.java.StreamUtils;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Stream;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
@@ -17,6 +12,11 @@ import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.exceptions.UnsupportedContentException;
 import io.annot8.core.properties.MutableProperties;
 import io.annot8.core.stores.GroupStore;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Stream;
 
 public class TestItem implements Item {
 
@@ -119,13 +119,13 @@ public class TestItem implements Item {
     return groups;
   }
 
+  public void setGroups(GroupStore groups) {
+    this.groups = groups;
+  }
+
   @Override
   public MutableProperties getProperties() {
     return properties;
-  }
-
-  public void setGroups(GroupStore groups) {
-    this.groups = groups;
   }
 
   public void setProperties(MutableProperties properties) {

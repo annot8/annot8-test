@@ -1,9 +1,9 @@
 package io.annot8.test;
 
-import java.util.UUID;
 import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.core.stores.AnnotationStore;
+import java.util.UUID;
 
 public abstract class AbstractTestContent<D> implements Content<D> {
 
@@ -62,8 +62,8 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   public void setName(String name) {
     this.name = name;
     // Update the content name in teh annotation store if we can
-    if(this.annotations instanceof TestAnnotationStore) {
-      ((TestAnnotationStore)annotations).setContentName(name);
+    if (this.annotations instanceof TestAnnotationStore) {
+      ((TestAnnotationStore) annotations).setContentName(name);
     }
   }
 

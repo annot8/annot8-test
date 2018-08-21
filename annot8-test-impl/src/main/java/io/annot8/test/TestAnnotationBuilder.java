@@ -2,14 +2,13 @@ package io.annot8.test;
 
 import io.annot8.common.implementations.factories.AnnotationBuilderFactory;
 import io.annot8.common.implementations.stores.SaveCallback;
-import java.util.Optional;
-import java.util.UUID;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Annotation.Builder;
 import io.annot8.core.bounds.Bounds;
-import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.MutableProperties;
 import io.annot8.core.properties.Properties;
+import java.util.Optional;
+import java.util.UUID;
 
 public class TestAnnotationBuilder implements Annotation.Builder {
 
@@ -42,7 +41,7 @@ public class TestAnnotationBuilder implements Annotation.Builder {
   }
 
   @Override
-  public Annotation save() throws IncompleteException {
+  public Annotation save() {
     String assignedId = this.id == null ? UUID.randomUUID().toString() : this.id;
 
     TestAnnotation annotation = new TestAnnotation();
@@ -82,8 +81,9 @@ public class TestAnnotationBuilder implements Annotation.Builder {
   @Override
   public Builder withoutProperty(String key, Object value) {
     Optional<Object> opt = this.properties.get(key);
-    if (opt.isPresent() && opt.get().equals(value))
+    if (opt.isPresent() && opt.get().equals(value)) {
       this.properties.remove(key);
+    }
 
     return this;
   }

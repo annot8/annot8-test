@@ -5,7 +5,6 @@ import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.annotations.Group.Builder;
-import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.Properties;
 import io.annot8.core.references.AnnotationReference;
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class TestGroupBuilder implements Group.Builder {
   }
 
   @Override
-  public Group save() throws IncompleteException {
+  public Group save() {
     TestGroup group = new TestGroup(id, type);
     group.setProperties(properties);
     group.setAnnotations(annotations);
@@ -70,8 +69,9 @@ public class TestGroupBuilder implements Group.Builder {
   @Override
   public Builder withoutProperty(String key, Object value) {
     Optional<Object> opt = this.properties.get(key);
-    if(opt.isPresent() && opt.get().equals(value))
+    if (opt.isPresent() && opt.get().equals(value)) {
       this.properties.remove(key);
+    }
 
     return this;
   }

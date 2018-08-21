@@ -3,13 +3,12 @@ package io.annot8.test;
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.ContentBuilderFactoryRegistry;
 import io.annot8.common.implementations.stores.SaveCallback;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Optional;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
-import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.Properties;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 
 public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryRegistry {
 
@@ -63,8 +62,8 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
 
     private final C instance;
     private final SaveCallback<C, C> saver;
-    private String id;
     private final TestProperties builderProperties = new TestProperties();
+    private String id;
 
     public TestContentBuilder(C instance, SaveCallback<C, C> saver) {
       this.instance = instance;
@@ -104,8 +103,9 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     @Override
     public Builder<C, D> withoutProperty(String key, Object value) {
       Optional<Object> opt = builderProperties.get(key);
-      if (opt.isPresent() && opt.get().equals(value))
+      if (opt.isPresent() && opt.get().equals(value)) {
         builderProperties.remove(key);
+      }
 
       return this;
     }
@@ -124,7 +124,7 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     }
 
     @Override
-    public C save() throws IncompleteException {
+    public C save() {
       instance.setProperties(builderProperties);
       return saver.save(instance);
     }

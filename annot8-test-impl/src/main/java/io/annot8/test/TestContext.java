@@ -4,14 +4,13 @@ import io.annot8.core.components.Resource;
 import io.annot8.core.context.Context;
 import io.annot8.core.settings.Settings;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 public class TestContext implements Context {
 
-  private  Settings settings = null;
+  private Settings settings = null;
   private Map<String, Resource> resources = Collections.emptyMap();
 
   public TestContext() {
@@ -49,8 +48,8 @@ public class TestContext implements Context {
   @Override
   public <T extends Resource> Stream<T> getResources(Class<T> clazz) {
     return resources.entrySet()
-          .stream()
-          .filter(r -> clazz.isInstance(r))
-          .map(clazz::cast);
+        .stream()
+        .filter(clazz::isInstance)
+        .map(clazz::cast);
   }
 }
