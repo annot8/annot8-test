@@ -9,8 +9,12 @@ import io.annot8.core.data.Item;
 import io.annot8.core.properties.Properties;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryRegistry {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(TestContentBuilderFactoryRegistry.class);
 
   @Override
   public <D, C extends Content<D>> Optional<ContentBuilderFactory<D, C>> get(
@@ -19,7 +23,7 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
       try {
         return Optional.of(new TestContentBuilderFactory(contentClass));
       } catch (Exception e) {
-        e.printStackTrace();
+        LOGGER.error("Unable to create test content", e);
       }
     }
 
@@ -45,7 +49,6 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
       return new TestContentBuilder(instance, saver);
     }
 
-
     @Override
     public Class getDataClass() {
       return instance.getDataClass();
@@ -63,7 +66,6 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     private final C instance;
     private final SaveCallback<C, C> saver;
     private final TestProperties builderProperties = new TestProperties();
-    private String id;
 
     public TestContentBuilder(C instance, SaveCallback<C, C> saver) {
       this.instance = instance;
@@ -72,7 +74,7 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
 
     @Override
     public Builder<C, D> withId(String id) {
-      this.id = id;
+      this.instance.setId(id);
       return this;
     }
 

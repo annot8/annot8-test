@@ -29,11 +29,11 @@ public class TestAnnotation implements Annotation {
     this(id, content, TestConstants.ANNOTATION_TYPE);
   }
 
-  public TestAnnotation(String content, String id, String type) {
+  public TestAnnotation(String id, String content, String type) {
     this(id, content, type, new TestBounds());
   }
 
-  public TestAnnotation(String content, String id, String type, Bounds bounds) {
+  public TestAnnotation(String id, String content, String type, Bounds bounds) {
     this.id = id;
     this.content = content;
     this.type = type;

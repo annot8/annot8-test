@@ -10,7 +10,9 @@ public class TestAnnotationReference implements AnnotationReference {
   private Annotation annotation;
 
   public TestAnnotationReference(Annotation annotation) {
-    assert annotation != null;
+    if (annotation == null) {
+      throw new IllegalArgumentException("Invalid null annotation");
+    }
     this.annotation = annotation;
   }
 
@@ -30,7 +32,9 @@ public class TestAnnotationReference implements AnnotationReference {
   }
 
   public void setAnnotation(Annotation annotation) {
-    assert annotation != null;
+    if (annotation == null) {
+      throw new IllegalArgumentException("Invalid null annotation");
+    }
     this.annotation = annotation;
   }
 

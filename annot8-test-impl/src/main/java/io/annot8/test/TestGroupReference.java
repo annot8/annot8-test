@@ -10,7 +10,9 @@ public class TestGroupReference implements GroupReference {
   private Group group;
 
   public TestGroupReference(Group group) {
-    assert group != null;
+    if(group == null) {
+      throw new IllegalArgumentException("Invalid null group");
+    }
     this.group = group;
   }
 
@@ -25,7 +27,9 @@ public class TestGroupReference implements GroupReference {
   }
 
   public void setGroup(Group group) {
-    assert group != null;
+    if(group == null) {
+      throw new IllegalArgumentException("Invalid null group");
+    }
     this.group = group;
   }
 

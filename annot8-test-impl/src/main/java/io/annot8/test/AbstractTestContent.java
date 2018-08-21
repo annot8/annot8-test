@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public abstract class AbstractTestContent<D> implements Content<D> {
 
-  private final String id;
+  private String id;
   private final Class<D> dataClass;
   private String name;
   private ImmutableProperties properties;
@@ -25,6 +25,10 @@ public abstract class AbstractTestContent<D> implements Content<D> {
     this.name = name;
     this.annotations = new TestAnnotationStore(name);
     this.properties = new TestProperties();
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   @Override
@@ -75,5 +79,6 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   public void setProperties(ImmutableProperties properties) {
     this.properties = properties;
   }
+
 
 }

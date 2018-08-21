@@ -4,6 +4,8 @@ open module io.annot8.test {
   requires io.annot8.common.utils;
   requires io.annot8.common.data;
 
+  requires slf4j.api;
+
   exports io.annot8.test;
   exports io.annot8.test.content;
 }

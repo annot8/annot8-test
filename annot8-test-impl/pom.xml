@@ -39,6 +39,11 @@
       <groupId>io.annot8</groupId>
       <artifactId>annot8-common-data</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
