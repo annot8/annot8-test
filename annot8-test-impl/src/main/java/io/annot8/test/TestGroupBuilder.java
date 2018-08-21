@@ -55,6 +55,12 @@ public class TestGroupBuilder implements Group.Builder {
   }
 
   @Override
+  public Builder withId(String id) {
+    this.id = id;
+    return this;
+  }
+
+  @Override
   public Builder newId() {
     id = null;
     return this;
