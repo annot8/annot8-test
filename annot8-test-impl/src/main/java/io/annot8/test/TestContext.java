@@ -31,8 +31,12 @@ public class TestContext implements Context {
   }
 
   @Override
-  public Optional<Settings> getSettings() {
-    return Optional.ofNullable(settings);
+  public Stream<Settings> getSettings() {
+    if(settings == null) {
+      return Stream.empty();
+    } else {
+      return Stream.of(settings);
+    }
   }
 
   @Override
