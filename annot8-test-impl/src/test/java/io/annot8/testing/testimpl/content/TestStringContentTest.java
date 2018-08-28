@@ -1,4 +1,4 @@
-package io.annot8.test.content;
+package io.annot8.testing.testimpl.content;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

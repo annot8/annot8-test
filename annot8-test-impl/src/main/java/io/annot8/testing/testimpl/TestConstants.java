@@ -1,4 +1,4 @@
-package io.annot8.test;
+package io.annot8.testing.testimpl;
 
 public final class TestConstants {
 

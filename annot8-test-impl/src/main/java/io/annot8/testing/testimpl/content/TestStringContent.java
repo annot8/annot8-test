@@ -1,9 +1,9 @@
-package io.annot8.test.content;
+package io.annot8.testing.testimpl.content;
 
 import io.annot8.common.data.content.Text;
 import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
-import io.annot8.test.AbstractTestContent;
+import io.annot8.testing.testimpl.AbstractTestContent;
 
 public class TestStringContent extends AbstractTestContent<String> implements Text {
 

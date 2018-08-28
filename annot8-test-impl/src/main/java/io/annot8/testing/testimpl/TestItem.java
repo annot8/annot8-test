@@ -1,4 +1,4 @@
-package io.annot8.test;
+package io.annot8.testing.testimpl;
 
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.ContentBuilderFactoryRegistry;

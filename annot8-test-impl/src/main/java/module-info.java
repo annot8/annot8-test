@@ -1,4 +1,4 @@
-open module io.annot8.test {
+open module io.annot8.testing.testimpl {
   requires transitive io.annot8.core;
   requires io.annot8.common.implementations;
   requires io.annot8.common.utils;
@@ -6,6 +6,6 @@ open module io.annot8.test {
 
   requires slf4j.api;
 
-  exports io.annot8.test;
-  exports io.annot8.test.content;
+  exports io.annot8.testing.testimpl.content;
+  exports io.annot8.testing.testimpl;
 }

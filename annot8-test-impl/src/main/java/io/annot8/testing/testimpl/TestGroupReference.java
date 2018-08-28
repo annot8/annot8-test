@@ -1,4 +1,4 @@
-package io.annot8.test;
+package io.annot8.testing.testimpl;
 
 import io.annot8.core.annotations.Group;
 import io.annot8.core.references.GroupReference;
