@@ -1,4 +1,4 @@
-open module io.annot8.testing.tcl.impl {
+open module io.annot8.testing.tck.impl {
   requires io.annot8.common.implementations;
   requires io.annot8.testing.testimpl;
 
