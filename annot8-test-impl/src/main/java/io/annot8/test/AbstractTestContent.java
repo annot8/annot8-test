@@ -20,11 +20,20 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   }
 
   public AbstractTestContent(Class<D> dataClass, String name) {
-    this.id = UUID.randomUUID().toString();
+    this(dataClass, UUID.randomUUID().toString(), name, new TestProperties());
+  }
+
+  public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties) {
+    this(dataClass, id, name, properties, null);
+  }
+
+  public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties, D data) {
+    this.id = id;
     this.dataClass = dataClass;
     this.name = name;
     this.annotations = new TestAnnotationStore(name);
-    this.properties = new TestProperties();
+    this.properties = properties;
+    this.data = data;
   }
 
   public void setId(String id) {
