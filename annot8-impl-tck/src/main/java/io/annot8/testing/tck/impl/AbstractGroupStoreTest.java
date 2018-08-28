@@ -201,7 +201,7 @@ public abstract class AbstractGroupStoreTest {
 
   private Annotation getTestAnnotation() {
     TestAnnotation annotation = new TestAnnotation();
-    annotation.setContentName(TEST_CONTENT_NAME);
+    annotation.setContentId(TEST_CONTENT_NAME);
     annotation.setId(TEST_ANNOTATION_ID);
     return annotation;
   }
@@ -211,7 +211,7 @@ public abstract class AbstractGroupStoreTest {
     AnnotationStore mockedStore = Mockito.mock(AnnotationStore.class);
 
     Mockito.when(mockedStore.getById(TEST_ANNOTATION_ID)).thenReturn(Optional.of(getTestAnnotation()));
-    Mockito.when(mock.getAnnotationStore(ArgumentMatchers.any())).thenReturn(mockedStore);
+    Mockito.when(mock.create(ArgumentMatchers.any())).thenReturn(mockedStore);
 
     return mock;
   }

@@ -22,8 +22,8 @@ public class TestAnnotationReference implements AnnotationReference {
   }
 
   @Override
-  public String getContentName() {
-    return annotation.getContentName();
+  public String getContentId() {
+    return annotation.getContentId();
   }
 
   @Override

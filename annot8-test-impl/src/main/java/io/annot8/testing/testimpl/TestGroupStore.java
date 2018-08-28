@@ -18,7 +18,7 @@ public class TestGroupStore implements GroupStore {
   private Item item;
 
   public TestGroupStore() {
-    this(null, TestGroupBuilder.factory());
+    this(null);
   }
 
   public TestGroupStore(Item item, GroupBuilderFactory<Group> groupBuilderFactory) {
@@ -26,12 +26,16 @@ public class TestGroupStore implements GroupStore {
     this.groupBuilderFactory = groupBuilderFactory;
   }
 
-  public Item getItem() {
-    return item;
+  public TestGroupStore(Item item) {
+    this(item, TestGroupBuilder.factory());
   }
 
   public void setItem(Item item) {
     this.item = item;
+  }
+
+  public Item getItem() {
+    return item;
   }
 
   @Override

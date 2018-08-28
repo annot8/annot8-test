@@ -14,13 +14,13 @@ public class TestAnnotationBuilder implements Annotation.Builder {
 
   private final MutableProperties properties = new TestProperties();
   private final SaveCallback<Annotation, Annotation> saver;
-  private String contentName;
+  private String contentId;
   private Bounds bounds;
   private String id;
   private String type;
 
-  public TestAnnotationBuilder(String content, SaveCallback<Annotation, Annotation> saver) {
-    this.contentName = content;
+  public TestAnnotationBuilder(String contentId, SaveCallback<Annotation, Annotation> saver) {
+    this.contentId = contentId;
     this.saver = saver;
   }
 
@@ -46,7 +46,7 @@ public class TestAnnotationBuilder implements Annotation.Builder {
 
     TestAnnotation annotation = new TestAnnotation();
     annotation.setBounds(bounds);
-    annotation.setContentName(contentName);
+    annotation.setContentId(contentId);
     annotation.setId(assignedId);
     annotation.setType(type);
     TestProperties testProperties = new TestProperties();
@@ -58,7 +58,7 @@ public class TestAnnotationBuilder implements Annotation.Builder {
 
   @Override
   public Builder from(Annotation from) {
-    contentName = from.getContentName();
+    contentId = from.getContentId();
     bounds = from.getBounds();
     id = from.getId();
     type = from.getType();

@@ -1,5 +1,6 @@
 package io.annot8.testing.testimpl;
 
+import io.annot8.common.implementations.stores.AnnotationStoreFactory;
 import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.core.stores.AnnotationStore;
@@ -29,12 +30,16 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   }
 
   public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties, Supplier<D> data) {
+    this(dataClass, n -> new TestAnnotationStore(n.getId()), id, name, properties, data);
+  }
+  public AbstractTestContent(Class<D> dataClass, AnnotationStoreFactory annotationStoreFactory, String id, String name, ImmutableProperties properties, Supplier<D> data) {
     this.id = id;
     this.dataClass = dataClass;
     this.name = name;
-    this.annotations = new TestAnnotationStore(name);
     this.properties = properties;
     this.data = data;
+
+    this.annotations = annotationStoreFactory.create(this);
   }
 
   public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties, D data) {
@@ -88,10 +93,6 @@ public abstract class AbstractTestContent<D> implements Content<D> {
 
   public void setName(String name) {
     this.name = name;
-    // Update the content name in teh annotation store if we can
-    if (this.annotations instanceof TestAnnotationStore) {
-      ((TestAnnotationStore) annotations).setContentName(name);
-    }
   }
 
   @Override

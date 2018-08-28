@@ -32,7 +32,7 @@ public abstract class AbstractAnnotationStoreTest {
   protected abstract AnnotationStore getAnnotationStore(Content content);
 
   private Content getTestContent() {
-    return new TestStringContent(TEST_ID, TEST_NAME, new TestProperties(), TEST_DATA);
+    return new TestStringContent(TEST_ID, TEST_NAME, new TestProperties(), () -> TEST_DATA);
   }
 
   @Test

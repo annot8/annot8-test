@@ -15,19 +15,19 @@ public class TestAnnotationStore implements AnnotationStore {
 
   private final Map<String, Annotation> annotations = new HashMap<>();
   private final AnnotationBuilderFactory<Annotation> annotationBuilderFactory;
-  private String contentName;
+  private String contentId;
 
   public TestAnnotationStore() {
     this(TestConstants.CONTENT_NAME);
   }
 
-  public TestAnnotationStore(String contentName) {
-    this(contentName, TestAnnotationBuilder.factory());
+  public TestAnnotationStore(String contentId) {
+    this(contentId, TestAnnotationBuilder.factory());
   }
 
-  public TestAnnotationStore(String contentName,
+  public TestAnnotationStore(String contentId,
       AnnotationBuilderFactory<Annotation> annotationBuilderFactory) {
-    this.contentName = contentName;
+    this.contentId = contentId;
     this.annotationBuilderFactory = annotationBuilderFactory;
   }
 
@@ -37,11 +37,11 @@ public class TestAnnotationStore implements AnnotationStore {
 
   @Override
   public Builder getBuilder() {
-    return annotationBuilderFactory.create(contentName, this, this::save);
+    return annotationBuilderFactory.create(contentId, this, this::save);
   }
 
-  public void setContentName(String contentName) {
-    this.contentName = contentName;
+  public void setContentId(String contentName) {
+    this.contentId = contentId;
   }
 
   public Annotation save(Builder annotationBuilder) throws IncompleteException {

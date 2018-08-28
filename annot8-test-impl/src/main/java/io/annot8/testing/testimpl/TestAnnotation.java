@@ -51,11 +51,11 @@ public class TestAnnotation implements Annotation {
   }
 
   @Override
-  public String getContentName() {
+  public String getContentId() {
     return content;
   }
 
-  public void setContentName(String content) {
+  public void setContentId(String content) {
     this.content = content;
   }
 

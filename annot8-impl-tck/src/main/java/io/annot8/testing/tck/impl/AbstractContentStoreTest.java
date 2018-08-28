@@ -1,12 +1,13 @@
 package io.annot8.testing.tck.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import io.annot8.common.implementations.properties.MapImmutableProperties;
 import io.annot8.common.implementations.properties.MapMutableProperties;
 import io.annot8.common.implementations.stores.ContentStore;
+import io.annot8.core.data.Content;
+import io.annot8.core.data.Item;
+import io.annot8.core.exceptions.IncompleteException;
+import io.annot8.core.properties.ImmutableProperties;
+import io.annot8.testing.testimpl.TestItem;
 import io.annot8.testing.testimpl.content.TestStringContent;
 import java.util.HashMap;
 import java.util.List;
@@ -15,11 +16,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import io.annot8.core.data.Content;
-import io.annot8.core.data.Item;
-import io.annot8.core.exceptions.IncompleteException;
-import io.annot8.core.properties.ImmutableProperties;
-import io.annot8.testing.testimpl.TestItem;
 
 public abstract class AbstractContentStoreTest {
 
@@ -126,11 +122,11 @@ public abstract class AbstractContentStoreTest {
 
   private TestStringContent createTestContent(String id, ImmutableProperties properties, String data,
       String name) {
-    return new TestStringContent(id, name, properties, data);
+    return new TestStringContent(id, name, properties, () -> data);
   }
 
   private TestStringContent createDefaultTestContent() {
-    return new TestStringContent(TEST_ID, TEST_NAME, createTestProperties(), TEST_DATA);
+    return new TestStringContent(TEST_ID, TEST_NAME, createTestProperties(), () -> TEST_DATA);
   }
 
 }

@@ -51,13 +51,13 @@ public class TestItem implements Item {
   }
 
   @Override
-  public Stream<String> listContents() {
+  public Stream<String> listNames() {
     return content.keySet().stream();
   }
 
   @Override
-  public Optional<Content<?>> getContent(String name) {
-    return Optional.ofNullable(content.get(name));
+  public Optional<Content<?>> getContent(String id) {
+    return Optional.ofNullable(content.get(id));
   }
 
   @Override
@@ -105,13 +105,13 @@ public class TestItem implements Item {
   }
 
   public <D, C extends Content<D>> C save(C c) {
-    content.put(c.getName(), c);
+    content.put(c.getId(), c);
     return c;
   }
 
   @Override
-  public void removeContent(String name) {
-    content.remove(name);
+  public void removeContent(String id) {
+    content.remove(id);
   }
 
   @Override
