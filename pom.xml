@@ -30,6 +30,7 @@
 
   <modules>
     <module>annot8-test-impl</module>
+    <module>annot8-impl-tck</module>
   </modules>
 
 </project>
