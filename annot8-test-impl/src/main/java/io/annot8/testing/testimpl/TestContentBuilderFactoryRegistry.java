@@ -9,6 +9,7 @@ import io.annot8.core.data.Item;
 import io.annot8.core.properties.Properties;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
+import java.util.function.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,7 +86,7 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
     }
 
     @Override
-    public Builder<C, D> withData(D data) {
+    public Builder<C, D> withData(Supplier<D> data) {
       instance.setData(data);
       return this;
     }

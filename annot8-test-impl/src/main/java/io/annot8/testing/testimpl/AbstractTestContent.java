@@ -4,6 +4,7 @@ import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.core.stores.AnnotationStore;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public abstract class AbstractTestContent<D> implements Content<D> {
 
@@ -13,7 +14,7 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   private ImmutableProperties properties;
   private AnnotationStore annotations;
 
-  private D data;
+  private Supplier<D> data;
 
   public AbstractTestContent(Class<D> dataClass) {
     this(dataClass, TestConstants.CONTENT_NAME);
@@ -24,16 +25,20 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   }
 
   public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties) {
-    this(dataClass, id, name, properties, null);
+    this(dataClass, id, name, properties, (D)null);
   }
 
-  public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties, D data) {
+  public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties, Supplier<D> data) {
     this.id = id;
     this.dataClass = dataClass;
     this.name = name;
     this.annotations = new TestAnnotationStore(name);
     this.properties = properties;
     this.data = data;
+  }
+
+  public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties, D data) {
+    this(dataClass, id, name, properties, () -> data);
   }
 
   public void setId(String id) {
@@ -51,10 +56,19 @@ public abstract class AbstractTestContent<D> implements Content<D> {
 
   @Override
   public D getData() {
-    return data;
+    return data.get();
   }
 
   public void setData(D data) {
+    if(data == null) {
+      this.setData((Supplier<D>)null);
+    } else {
+      this.setData(() -> data);
+    }
+
+  }
+
+  public void setData(Supplier<D> data) {
     this.data = data;
   }
 
