@@ -19,6 +19,7 @@
     <dependency>
       <groupId>io.annot8</groupId>
       <artifactId>annot8-test-impl</artifactId>
+      <scope>compile</scope>
     </dependency>
 
     <dependency>
