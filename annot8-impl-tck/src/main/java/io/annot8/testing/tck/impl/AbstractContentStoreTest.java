@@ -4,20 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import io.annot8.common.implementations.properties.MapImmutableProperties;
+import io.annot8.common.implementations.properties.MapMutableProperties;
+import io.annot8.common.implementations.stores.ContentStore;
 import io.annot8.testing.testimpl.content.TestStringContent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Item;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.ImmutableProperties;
-import io.annot8.defaultimpl.properties.SimpleImmutableProperties;
-import io.annot8.defaultimpl.properties.SimpleMutableProperties;
-import io.annot8.spring.services.ContentStore;
 import io.annot8.testing.testimpl.TestItem;
 
 public abstract class AbstractContentStoreTest {
@@ -112,8 +113,8 @@ public abstract class AbstractContentStoreTest {
   private ImmutableProperties createTestProperties() {
     Map<String, Object> props = new HashMap<>();
     props.put(TEST_PROPERTY_KEY, TEST_PROPERTY_VALUE);
-    SimpleMutableProperties simpleMutableProperties = new SimpleMutableProperties(props);
-    ImmutableProperties.Builder propsBuilder = new SimpleImmutableProperties.Builder();
+    MapMutableProperties simpleMutableProperties = new MapMutableProperties(props);
+    ImmutableProperties.Builder propsBuilder = new MapImmutableProperties.Builder();
     ImmutableProperties properties = null;
     try {
       properties = propsBuilder.from(simpleMutableProperties).save();

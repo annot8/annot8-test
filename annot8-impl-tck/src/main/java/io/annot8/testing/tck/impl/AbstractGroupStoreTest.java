@@ -1,18 +1,15 @@
 package io.annot8.testing.tck.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.when;
+
+import io.annot8.common.implementations.properties.MapMutableProperties;
+import io.annot8.common.implementations.stores.AnnotationStoreFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -23,8 +20,6 @@ import io.annot8.core.data.Item;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.stores.AnnotationStore;
 import io.annot8.core.stores.GroupStore;
-import io.annot8.defaultimpl.properties.SimpleMutableProperties;
-import io.annot8.spring.services.AnnotationStoreFactory;
 import io.annot8.testing.testimpl.TestAnnotation;
 
 public abstract class AbstractGroupStoreTest {
@@ -173,7 +168,7 @@ public abstract class AbstractGroupStoreTest {
     Group group = null;
     try {
       group =
-          groupBuilder.withType(groupType).withProperties(new SimpleMutableProperties(properties))
+          groupBuilder.withType(groupType).withProperties(new MapMutableProperties(properties))
               .withProperty(propKey3, propVal3).withoutProperty(propKey1)
               .withoutProperty(propKey2, propVal2).withAnnotation(role, annotation).save();
     } catch (IncompleteException e) {
