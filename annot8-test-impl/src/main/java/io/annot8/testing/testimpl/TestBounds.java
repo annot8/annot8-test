@@ -2,11 +2,28 @@ package io.annot8.testing.testimpl;
 
 import io.annot8.core.bounds.Bounds;
 import io.annot8.core.data.Content;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
+/**
+ * Test Bounds
+ *
+ * The id is use for uniqueness (is boundsA == boundsB), but it has no meaning itself within Annot8
+ */
 public class TestBounds implements Bounds {
 
+  private final String id;
+
   // TODO: Add mocked responses for this perhaps (eg map of requriedClass to value for getData)
+
+  public TestBounds() {
+    this(null);
+  }
+
+  public TestBounds(String id) {
+    this.id = id == null ? UUID.randomUUID().toString() : id;
+  }
 
   @Override
   public <D, C extends Content<D>, R> Optional<R> getData(C content, Class<R> requiredClass) {
@@ -19,4 +36,26 @@ public class TestBounds implements Bounds {
     // true for everything
     return true;
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TestBounds that = (TestBounds) o;
+    return Objects.equals(id, that.id);
+  }
+
 }
