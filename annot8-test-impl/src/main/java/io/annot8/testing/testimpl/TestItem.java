@@ -52,7 +52,7 @@ public class TestItem implements Item {
 
   @Override
   public Stream<String> listNames() {
-    return content.keySet().stream();
+    return content.values().stream().map(Content::getName);
   }
 
   @Override
