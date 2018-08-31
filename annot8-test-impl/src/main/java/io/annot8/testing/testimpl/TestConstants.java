@@ -16,6 +16,10 @@ public final class TestConstants {
 
   public static final String ANNOTATION_TYPE = "testAnnotationType";
 
+  public static final String PROPERTY_KEY = "testPropertyKey";
+
+  public static final String PROPERTY_VALUE = "testPropertyValue";
+
   private TestConstants() {
     // Singleton
   }
