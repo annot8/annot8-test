@@ -20,6 +20,8 @@ import java.util.stream.Stream;
 
 public class TestItem implements Item {
 
+  private final String parentId;
+
   private final String id;
   private final ItemFactory itemFactory;
   private MutableProperties properties;
@@ -43,7 +45,14 @@ public class TestItem implements Item {
 
   public TestItem(ItemFactory itemFactory, GroupStore groupStore,
       ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {
+    this(itemFactory, groupStore, contentBuilderFactoryRegistry, null);
+  }
+
+
+  public TestItem(ItemFactory itemFactory, GroupStore groupStore,
+      ContentBuilderFactoryRegistry contentBuilderFactoryRegistry, String parentId) {
     this.id = UUID.randomUUID().toString();
+    this.parentId = parentId;
     this.itemFactory = itemFactory;
     this.properties = new TestProperties();
     this.groups = groupStore;
@@ -73,6 +82,10 @@ public class TestItem implements Item {
   @Override
   public String getId() {
     return id;
+  }
+
+  public Optional<String> getParent() {
+    return Optional.of(parentId);
   }
 
   @Override

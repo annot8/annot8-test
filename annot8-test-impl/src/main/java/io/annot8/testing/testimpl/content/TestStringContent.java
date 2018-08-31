@@ -41,34 +41,40 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
 
   public static class Builder extends AbstractContentBuilder<String, TestStringContent> {
 
+    private final AnnotationStoreFactory annotationStoreFactory;
+
     public Builder(
         AnnotationStoreFactory annotationStoreFactory,
         SaveCallback<TestStringContent, TestStringContent> saver) {
-      super(annotationStoreFactory, saver);
+      super( saver);
+      this.annotationStoreFactory = annotationStoreFactory;
     }
 
     @Override
     protected TestStringContent create(String id, String name,
         ImmutableProperties properties, Supplier<String> data) throws IncompleteException {
-      return new TestStringContent(getAnnotationStoreFactory(), id, name, properties, data);
+      return new TestStringContent(annotationStoreFactory, id, name, properties, data);
     }
 
   }
 
   public static class BuilderFactory extends AbstractContentBuilderFactory<String, TestStringContent> {
 
+    private final AnnotationStoreFactory annotationStoreFactory;
+
     public BuilderFactory() {
       this(TestAnnotationStoreFactory.getInstance());
     }
 
     public BuilderFactory(AnnotationStoreFactory annotationStoreFactory) {
-      super(String.class, TestStringContent.class, annotationStoreFactory);
+      super(String.class, TestStringContent.class);
+      this.annotationStoreFactory = annotationStoreFactory;
     }
 
     @Override
     public Builder create(Item item,
         SaveCallback<TestStringContent, TestStringContent> saver) {
-      return new Builder(getAnnotationStoreFactory(), saver);
+      return new Builder(annotationStoreFactory, saver);
     }
   }
 }
