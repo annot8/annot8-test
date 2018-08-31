@@ -12,4 +12,6 @@ open module io.annot8.testing.testimpl {
   exports io.annot8.testing.testimpl.content;
   exports io.annot8.testing.testimpl;
   exports io.annot8.testing.testimpl.serialisation;
+  exports io.annot8.testing.testimpl.pipeline;
+
 }
