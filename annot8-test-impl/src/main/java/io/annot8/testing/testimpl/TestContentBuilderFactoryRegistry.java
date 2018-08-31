@@ -1,25 +1,40 @@
 package io.annot8.testing.testimpl;
 
+import io.annot8.common.data.content.Text;
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
-import io.annot8.common.implementations.registries.ContentBuilderFactoryRegistry;
+import io.annot8.common.implementations.registries.SimpleContentBuilderFactoryRegistry;
 import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
 import io.annot8.core.properties.Properties;
+import io.annot8.testing.testimpl.content.TestStringContent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import java.util.function.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryRegistry {
+public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFactoryRegistry {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(TestContentBuilderFactoryRegistry.class);
 
+
+  public TestContentBuilderFactoryRegistry() {
+    this(true);
+  }
+
+  public TestContentBuilderFactoryRegistry(boolean includeDefaultContentBuilders) {
+
+    if(includeDefaultContentBuilders) {
+      register(Text.class, new TestStringContent.BuilderFactory());
+
+    }
+  }
   @Override
   public <D, C extends Content<D>> Optional<ContentBuilderFactory<D, C>> get(
       Class<C> contentClass) {
+    // if you specifically ask for testcontent types we get create them (without needing registration)
     if (AbstractTestContent.class.isAssignableFrom(contentClass)) {
       try {
         return Optional.of(new TestContentBuilderFactory(contentClass));
@@ -28,7 +43,9 @@ public class TestContentBuilderFactoryRegistry implements ContentBuilderFactoryR
       }
     }
 
-    return Optional.empty();
+
+    // Otherwise fallback to standard registry
+    return super.get(contentClass);
   }
 
   public static class TestContentBuilderFactory<D, C extends AbstractTestContent<D>>
