@@ -6,14 +6,14 @@ import io.annot8.core.annotations.Group.Builder;
 import io.annot8.core.data.Item;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.stores.GroupStore;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 public class TestGroupStore implements GroupStore {
 
-  private final Map<String, Group> groups = new HashMap<>();
+  private final Map<String, Group> groups = new ConcurrentHashMap<>();
   private final GroupBuilderFactory<Group> groupBuilderFactory;
   private Item item;
 

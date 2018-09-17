@@ -6,14 +6,14 @@ import io.annot8.core.annotations.Annotation.Builder;
 import io.annot8.core.data.Content;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.stores.AnnotationStore;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 public class TestAnnotationStore implements AnnotationStore {
 
-  private final Map<String, Annotation> annotations = new HashMap<>();
+  private final Map<String, Annotation> annotations = new ConcurrentHashMap<>();
   private final AnnotationBuilderFactory<Annotation> annotationBuilderFactory;
   private String contentId;
 

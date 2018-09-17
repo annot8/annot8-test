@@ -12,10 +12,10 @@ import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.exceptions.UnsupportedContentException;
 import io.annot8.core.properties.MutableProperties;
 import io.annot8.core.stores.GroupStore;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 public class TestItem implements Item {
@@ -27,7 +27,7 @@ public class TestItem implements Item {
   private MutableProperties properties;
   private GroupStore groups;
   private ContentBuilderFactoryRegistry contentBuilderFactoryRegistry;
-  private Map<String, Content<?>> content = new HashMap<>();
+  private Map<String, Content<?>> content = new ConcurrentHashMap<>();
 
   private boolean discarded = false;
 
