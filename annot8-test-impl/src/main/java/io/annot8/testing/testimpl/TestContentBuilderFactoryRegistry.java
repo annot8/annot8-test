@@ -1,5 +1,6 @@
 package io.annot8.testing.testimpl;
 
+import io.annot8.common.data.content.FileContent;
 import io.annot8.common.data.content.Text;
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.SimpleContentBuilderFactoryRegistry;
@@ -8,6 +9,7 @@ import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
 import io.annot8.core.properties.Properties;
+import io.annot8.testing.testimpl.content.TestFileContent;
 import io.annot8.testing.testimpl.content.TestStringContent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
@@ -28,7 +30,7 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
 
     if(includeDefaultContentBuilders) {
       register(Text.class, new TestStringContent.BuilderFactory());
-
+      register(FileContent.class, new TestFileContent.BuilderFactory());
     }
   }
   @Override
