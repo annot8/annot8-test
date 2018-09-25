@@ -5,7 +5,7 @@ import io.annot8.core.settings.Settings;
 
 public class TestSettings implements Settings {
 
-  private boolean valid;
+  private final boolean valid;
 
   public TestSettings() {
     this(true);

@@ -71,8 +71,7 @@ public class TestInputStreamContent extends AbstractTestContent<InputStream>
 
     @Override
     protected TestInputStreamContent create(
-        String id, String name, ImmutableProperties properties, Supplier<InputStream> data)
-        throws IncompleteException {
+        String id, String name, ImmutableProperties properties, Supplier<InputStream> data) {
       return new TestInputStreamContent(annotationStoreFactory, id, name, properties, data);
     }
   }

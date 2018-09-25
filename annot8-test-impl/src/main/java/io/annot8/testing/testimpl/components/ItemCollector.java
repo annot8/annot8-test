@@ -14,7 +14,7 @@ public class ItemCollector implements Processor {
   private final List<Item> items = new LinkedList<>();
 
   @Override
-  public ProcessorResponse process(Item item) throws Annot8Exception {
+  public ProcessorResponse process(Item item) {
     items.add(item);
     return ProcessorResponse.ok();
   }

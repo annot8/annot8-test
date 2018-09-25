@@ -43,7 +43,7 @@ public class TestAnnotationStore implements AnnotationStore {
   }
 
   public void setContentId(String contentName) {
-    this.contentId = contentId;
+    this.contentId = contentName;
   }
 
   public Annotation save(Builder annotationBuilder) throws IncompleteException {

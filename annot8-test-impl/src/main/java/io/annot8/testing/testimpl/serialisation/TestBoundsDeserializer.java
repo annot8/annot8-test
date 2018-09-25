@@ -26,7 +26,7 @@ public class TestBoundsDeserializer extends AbstractAnnot8Deserializer<TestBound
 
   @Override
   public TestBounds deserialize(JsonParser p, DeserializationContext ctxt)
-      throws IOException, JsonProcessingException {
+      throws IOException {
     JsonNode n = p.getCodec().readTree(p);
     String id = n.get(KEY).asText();
     return new TestBounds(id);

@@ -65,8 +65,7 @@ public class TestFileContent extends AbstractTestContent<File> implements FileCo
 
     @Override
     protected TestFileContent create(
-        String id, String name, ImmutableProperties properties, Supplier<File> data)
-        throws IncompleteException {
+        String id, String name, ImmutableProperties properties, Supplier<File> data) {
       return new TestFileContent(annotationStoreFactory, id, name, properties, data);
     }
   }

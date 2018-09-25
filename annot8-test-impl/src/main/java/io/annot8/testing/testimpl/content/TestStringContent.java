@@ -64,8 +64,7 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
 
     @Override
     protected TestStringContent create(
-        String id, String name, ImmutableProperties properties, Supplier<String> data)
-        throws IncompleteException {
+        String id, String name, ImmutableProperties properties, Supplier<String> data) {
       return new TestStringContent(annotationStoreFactory, id, name, properties, data);
     }
   }

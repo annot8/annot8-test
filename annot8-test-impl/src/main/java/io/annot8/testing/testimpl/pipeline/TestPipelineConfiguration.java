@@ -9,11 +9,11 @@ import io.annot8.common.implementations.pipelines.configuration.PipelineConfigur
 
 public class TestPipelineConfiguration implements PipelineConfiguration {
 
-  private Collection<ComponentConfiguration> processors;
+  private final Collection<ComponentConfiguration> processors;
 
-  private Collection<ComponentConfiguration> sources;
+  private final Collection<ComponentConfiguration> sources;
 
-  private Collection<ComponentConfiguration> resources;
+  private final Collection<ComponentConfiguration> resources;
 
   public TestPipelineConfiguration() {
     this(null, null, null);

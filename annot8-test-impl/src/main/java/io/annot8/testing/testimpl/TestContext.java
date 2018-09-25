@@ -12,8 +12,8 @@ import io.annot8.core.settings.Settings;
 
 public class TestContext implements Context {
 
-  private Settings settings = null;
-  private Map<String, Resource> resources = Collections.emptyMap();
+  private Settings settings;
+  private Map<String, Resource> resources;
 
   public TestContext() {
     this(null, Collections.emptyMap());
@@ -29,16 +29,12 @@ public class TestContext implements Context {
 
   public TestContext(Settings settings, Map<String, Resource> resources) {
     this.settings = settings;
-    this.resources = resources;
+    this.resources = resources == null ? Collections.emptyMap() : resources;
   }
 
   @Override
   public Stream<Settings> getSettings() {
-    if (settings == null) {
-      return Stream.empty();
-    } else {
-      return Stream.of(settings);
-    }
+    return Stream.ofNullable(settings);
   }
 
   @Override
