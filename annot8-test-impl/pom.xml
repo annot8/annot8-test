@@ -31,11 +31,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>io.annot8</groupId>
       <artifactId>annot8-common-utils</artifactId>
     </dependency>
