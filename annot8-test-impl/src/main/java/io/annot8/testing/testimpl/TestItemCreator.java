@@ -1,3 +1,4 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
 
 import io.annot8.common.implementations.factories.ItemCreator;
@@ -15,5 +16,4 @@ public class TestItemCreator implements ItemCreator {
   public Item create(ItemFactory factory, Item parent) {
     return new TestItem(factory, parent.getId());
   }
-
 }

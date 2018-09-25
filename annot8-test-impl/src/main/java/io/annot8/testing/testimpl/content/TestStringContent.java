@@ -1,4 +1,7 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl.content;
+
+import java.util.function.Supplier;
 
 import io.annot8.common.data.content.Text;
 import io.annot8.common.implementations.content.AbstractContentBuilder;
@@ -12,7 +15,6 @@ import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.core.stores.AnnotationStore;
 import io.annot8.testing.testimpl.AbstractTestContent;
 import io.annot8.testing.testimpl.TestAnnotationStoreFactory;
-import java.util.function.Supplier;
 
 public class TestStringContent extends AbstractTestContent<String> implements Text {
 
@@ -21,15 +23,26 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
     setData("Test data");
   }
 
-  public TestStringContent(String id, String name, ImmutableProperties properties, Supplier<String> data) {
+  public TestStringContent(
+      String id, String name, ImmutableProperties properties, Supplier<String> data) {
     super(String.class, id, name, properties, data);
   }
 
-  public TestStringContent(AnnotationStore annotations, String id, String name, ImmutableProperties properties, Supplier<String> data) {
+  public TestStringContent(
+      AnnotationStore annotations,
+      String id,
+      String name,
+      ImmutableProperties properties,
+      Supplier<String> data) {
     super(String.class, c -> annotations, id, name, properties, data);
   }
 
-  public TestStringContent(AnnotationStoreFactory annotationStore, String id, String name, ImmutableProperties properties, Supplier<String> data) {
+  public TestStringContent(
+      AnnotationStoreFactory annotationStore,
+      String id,
+      String name,
+      ImmutableProperties properties,
+      Supplier<String> data) {
     super(String.class, annotationStore, id, name, properties, data);
   }
 
@@ -38,7 +51,6 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
     return Text.class;
   }
 
-
   public static class Builder extends AbstractContentBuilder<String, TestStringContent> {
 
     private final AnnotationStoreFactory annotationStoreFactory;
@@ -46,19 +58,20 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
     public Builder(
         AnnotationStoreFactory annotationStoreFactory,
         SaveCallback<TestStringContent, TestStringContent> saver) {
-      super( saver);
+      super(saver);
       this.annotationStoreFactory = annotationStoreFactory;
     }
 
     @Override
-    protected TestStringContent create(String id, String name,
-        ImmutableProperties properties, Supplier<String> data) throws IncompleteException {
+    protected TestStringContent create(
+        String id, String name, ImmutableProperties properties, Supplier<String> data)
+        throws IncompleteException {
       return new TestStringContent(annotationStoreFactory, id, name, properties, data);
     }
-
   }
 
-  public static class BuilderFactory extends AbstractContentBuilderFactory<String, TestStringContent> {
+  public static class BuilderFactory
+      extends AbstractContentBuilderFactory<String, TestStringContent> {
 
     private final AnnotationStoreFactory annotationStoreFactory;
 
@@ -72,8 +85,7 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
     }
 
     @Override
-    public Builder create(Item item,
-        SaveCallback<TestStringContent, TestStringContent> saver) {
+    public Builder create(Item item, SaveCallback<TestStringContent, TestStringContent> saver) {
       return new Builder(annotationStoreFactory, saver);
     }
   }

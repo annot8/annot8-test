@@ -1,22 +1,23 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.tck.impl;
 
-
-
-import io.annot8.testing.testimpl.TestBounds;
-import io.annot8.testing.testimpl.TestProperties;
-import io.annot8.testing.testimpl.content.TestStringContent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Annotation.Builder;
 import io.annot8.core.data.Content;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.stores.AnnotationStore;
+import io.annot8.testing.testimpl.TestBounds;
+import io.annot8.testing.testimpl.TestProperties;
+import io.annot8.testing.testimpl.content.TestStringContent;
 
 public abstract class AbstractAnnotationStoreTest {
 
@@ -118,8 +119,10 @@ public abstract class AbstractAnnotationStoreTest {
     String annotation2Id = "Annotation2";
     Annotation annotation2 = createTestAnnotationWithId(annotation2Id);
 
-    Map<String, Annotation> annotations = getAnnotationStore(getTestContent()).getAll()
-        .collect(Collectors.toMap(Annotation::getId, (a) -> a));
+    Map<String, Annotation> annotations =
+        getAnnotationStore(getTestContent())
+            .getAll()
+            .collect(Collectors.toMap(Annotation::getId, (a) -> a));
 
     Assertions.assertTrue(annotations.containsKey(TEST_ANNOTATION_ID));
     Assertions.assertTrue(annotations.containsKey(annotation2Id));
@@ -197,8 +200,8 @@ public abstract class AbstractAnnotationStoreTest {
   }
 
   private Annotation createDefaultTestAnnotation() {
-    return createTestAnnotation(TEST_ANNOTATION_ID, TEST_ANNOTATION_TYPE, TEST_PROPERTY_KEY,
-        TEST_PROPERTY_VALUE);
+    return createTestAnnotation(
+        TEST_ANNOTATION_ID, TEST_ANNOTATION_TYPE, TEST_PROPERTY_KEY, TEST_PROPERTY_VALUE);
   }
 
   private Annotation createTestAnnotationWithId(String id) {
@@ -208,12 +211,17 @@ public abstract class AbstractAnnotationStoreTest {
   private Annotation createTestAnnotation(String id, String type, String key, String value) {
     Annotation annotation = null;
     try {
-      annotation = getAnnotationStore(getTestContent()).create().withId(id).withType(type)
-          .withProperty(key, value).withBounds(bounds).save();
+      annotation =
+          getAnnotationStore(getTestContent())
+              .create()
+              .withId(id)
+              .withType(type)
+              .withProperty(key, value)
+              .withBounds(bounds)
+              .save();
     } catch (IncompleteException e) {
       Assertions.fail("Exception is not expected", e);
     }
     return annotation;
   }
-
 }

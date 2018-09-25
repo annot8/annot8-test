@@ -1,15 +1,18 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
 
-import io.annot8.core.bounds.Bounds;
-import io.annot8.core.data.Content;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import io.annot8.core.bounds.Bounds;
+import io.annot8.core.data.Content;
+
 /**
  * Test Bounds
  *
- * The id is use for uniqueness (is boundsA == boundsB), but it has no meaning itself within Annot8
+ * <p>The id is use for uniqueness (is boundsA == boundsB), but it has no meaning itself within
+ * Annot8
  */
 public class TestBounds implements Bounds {
 
@@ -57,5 +60,4 @@ public class TestBounds implements Bounds {
     TestBounds that = (TestBounds) o;
     return Objects.equals(id, that.id);
   }
-
 }

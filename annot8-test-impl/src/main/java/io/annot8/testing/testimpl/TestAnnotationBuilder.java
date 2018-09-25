@@ -1,4 +1,8 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
+
+import java.util.Optional;
+import java.util.UUID;
 
 import io.annot8.common.implementations.factories.AnnotationBuilderFactory;
 import io.annot8.common.implementations.stores.SaveCallback;
@@ -7,8 +11,6 @@ import io.annot8.core.annotations.Annotation.Builder;
 import io.annot8.core.bounds.Bounds;
 import io.annot8.core.properties.MutableProperties;
 import io.annot8.core.properties.Properties;
-import java.util.Optional;
-import java.util.UUID;
 
 public class TestAnnotationBuilder implements Annotation.Builder {
 
@@ -105,5 +107,4 @@ public class TestAnnotationBuilder implements Annotation.Builder {
     this.type = type;
     return this;
   }
-
 }

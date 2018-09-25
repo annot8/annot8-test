@@ -1,4 +1,14 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.tck.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import io.annot8.common.implementations.properties.MapImmutableProperties;
 import io.annot8.common.implementations.properties.MapMutableProperties;
@@ -9,21 +19,14 @@ import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.testing.testimpl.TestItem;
 import io.annot8.testing.testimpl.content.TestStringContent;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public abstract class AbstractContentStoreTest {
 
-  private final static String TEST_ID = "TEST_ID";
-  private final static String TEST_NAME = "TEST_NAME";
-  private final static String TEST_DATA = "TEST_DATA";
-  private final static String TEST_PROPERTY_KEY = "TEST_PROPERTY_KEY";
-  private final static String TEST_PROPERTY_VALUE = "TEST_PROPERTY_VALUE";
+  private static final String TEST_ID = "TEST_ID";
+  private static final String TEST_NAME = "TEST_NAME";
+  private static final String TEST_DATA = "TEST_DATA";
+  private static final String TEST_PROPERTY_KEY = "TEST_PROPERTY_KEY";
+  private static final String TEST_PROPERTY_VALUE = "TEST_PROPERTY_VALUE";
   private final TestItem item = new TestItem();
 
   protected abstract ContentStore getContentStore(Item item);
@@ -57,8 +60,8 @@ public abstract class AbstractContentStoreTest {
 
     Optional<Content<?>> content2 = contentStore.getContent(contentName2);
     Assertions.assertTrue(content.isPresent());
-    testContentFields(testId2, contentName2, TEST_DATA, TEST_PROPERTY_KEY, TEST_PROPERTY_VALUE,
-        content2.get());
+    testContentFields(
+        testId2, contentName2, TEST_DATA, TEST_PROPERTY_KEY, TEST_PROPERTY_VALUE, content2.get());
   }
 
   @Test
@@ -67,8 +70,8 @@ public abstract class AbstractContentStoreTest {
     contentStore.save(createDefaultTestContent());
     String contentName2 = "contentName2";
     String contentId2 = "contentId2";
-    contentStore
-        .save(createTestContent(contentId2, createTestProperties(), TEST_DATA, contentName2));
+    contentStore.save(
+        createTestContent(contentId2, createTestProperties(), TEST_DATA, contentName2));
 
     List<String> contentNames = contentStore.getContentNames().collect(Collectors.toList());
     Assertions.assertEquals(2, contentNames.size());
@@ -92,18 +95,24 @@ public abstract class AbstractContentStoreTest {
     testDefaultContent(savedContent);
   }
 
-  private void testContentFields(String expectedId, String expectedName, String expectedData,
-      String expectedPropertyKey, String expectedPropertyValue, Content content) {
+  private void testContentFields(
+      String expectedId,
+      String expectedName,
+      String expectedData,
+      String expectedPropertyKey,
+      String expectedPropertyValue,
+      Content content) {
     Assertions.assertEquals(expectedId, content.getId());
     Assertions.assertEquals(expectedName, content.getName());
     Assertions.assertEquals(expectedData, content.getData());
     Assertions.assertTrue(content.getProperties().has(expectedPropertyKey));
-    Assertions.assertEquals(expectedPropertyValue, content.getProperties().get(expectedPropertyKey).get());
+    Assertions.assertEquals(
+        expectedPropertyValue, content.getProperties().get(expectedPropertyKey).get());
   }
 
   private void testDefaultContent(Content content) {
-    testContentFields(TEST_ID, TEST_NAME, TEST_DATA, TEST_PROPERTY_KEY, TEST_PROPERTY_VALUE,
-        content);
+    testContentFields(
+        TEST_ID, TEST_NAME, TEST_DATA, TEST_PROPERTY_KEY, TEST_PROPERTY_VALUE, content);
   }
 
   private ImmutableProperties createTestProperties() {
@@ -120,13 +129,12 @@ public abstract class AbstractContentStoreTest {
     return properties;
   }
 
-  private TestStringContent createTestContent(String id, ImmutableProperties properties, String data,
-      String name) {
+  private TestStringContent createTestContent(
+      String id, ImmutableProperties properties, String data, String name) {
     return new TestStringContent(id, name, properties, () -> data);
   }
 
   private TestStringContent createDefaultTestContent() {
     return new TestStringContent(TEST_ID, TEST_NAME, createTestProperties(), () -> TEST_DATA);
   }
-
 }

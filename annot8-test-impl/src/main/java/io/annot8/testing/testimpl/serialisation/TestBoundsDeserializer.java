@@ -1,14 +1,18 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl.serialisation;
+
+import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+
 import io.annot8.common.serialisation.jackson.AbstractAnnot8Deserializer;
 import io.annot8.testing.testimpl.TestBounds;
-import java.io.IOException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TestBoundsDeserializer extends AbstractAnnot8Deserializer<TestBounds> {
 
@@ -27,6 +31,4 @@ public class TestBoundsDeserializer extends AbstractAnnot8Deserializer<TestBound
     String id = n.get(KEY).asText();
     return new TestBounds(id);
   }
-
-
 }

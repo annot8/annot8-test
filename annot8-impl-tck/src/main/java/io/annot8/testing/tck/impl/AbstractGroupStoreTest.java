@@ -1,18 +1,20 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.tck.impl;
 
-
-import io.annot8.common.implementations.properties.MapMutableProperties;
-import io.annot8.common.implementations.stores.AnnotationStoreFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
+
+import io.annot8.common.implementations.properties.MapMutableProperties;
+import io.annot8.common.implementations.stores.AnnotationStoreFactory;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.data.Content;
@@ -92,7 +94,6 @@ public abstract class AbstractGroupStoreTest {
     groupStore.delete(group);
 
     Assertions.assertEquals(0, groupStore.getAll().count());
-
   }
 
   @Test
@@ -144,8 +145,13 @@ public abstract class AbstractGroupStoreTest {
   private Group createTestGroup(GroupStore store, Annotation annotation) {
     Group group = null;
     try {
-      group = store.create().withAnnotation(role, annotation).withProperty(key, value)
-          .withType(role).save();
+      group =
+          store
+              .create()
+              .withAnnotation(role, annotation)
+              .withProperty(key, value)
+              .withType(role)
+              .save();
     } catch (IncompleteException e) {
       Assertions.fail("Failed to build group.", e);
     }
@@ -168,9 +174,14 @@ public abstract class AbstractGroupStoreTest {
     Group group = null;
     try {
       group =
-          groupBuilder.withType(groupType).withProperties(new MapMutableProperties(properties))
-              .withProperty(propKey3, propVal3).withoutProperty(propKey1)
-              .withoutProperty(propKey2, propVal2).withAnnotation(role, annotation).save();
+          groupBuilder
+              .withType(groupType)
+              .withProperties(new MapMutableProperties(properties))
+              .withProperty(propKey3, propVal3)
+              .withoutProperty(propKey1)
+              .withoutProperty(propKey2, propVal2)
+              .withAnnotation(role, annotation)
+              .save();
     } catch (IncompleteException e) {
       Assertions.fail("Group failed to build", e);
     }
@@ -210,10 +221,10 @@ public abstract class AbstractGroupStoreTest {
     AnnotationStoreFactory mock = Mockito.mock(AnnotationStoreFactory.class);
     AnnotationStore mockedStore = Mockito.mock(AnnotationStore.class);
 
-    Mockito.when(mockedStore.getById(TEST_ANNOTATION_ID)).thenReturn(Optional.of(getTestAnnotation()));
+    Mockito.when(mockedStore.getById(TEST_ANNOTATION_ID))
+        .thenReturn(Optional.of(getTestAnnotation()));
     Mockito.when(mock.create(ArgumentMatchers.any())).thenReturn(mockedStore);
 
     return mock;
   }
-
 }

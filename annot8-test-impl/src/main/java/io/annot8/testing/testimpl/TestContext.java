@@ -1,12 +1,14 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
 
-import io.annot8.core.components.Resource;
-import io.annot8.core.context.Context;
-import io.annot8.core.settings.Settings;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import io.annot8.core.components.Resource;
+import io.annot8.core.context.Context;
+import io.annot8.core.settings.Settings;
 
 public class TestContext implements Context {
 
@@ -32,7 +34,7 @@ public class TestContext implements Context {
 
   @Override
   public Stream<Settings> getSettings() {
-    if(settings == null) {
+    if (settings == null) {
       return Stream.empty();
     } else {
       return Stream.of(settings);
@@ -51,9 +53,6 @@ public class TestContext implements Context {
 
   @Override
   public <T extends Resource> Stream<T> getResources(Class<T> clazz) {
-    return resources.entrySet()
-        .stream()
-        .filter(clazz::isInstance)
-        .map(clazz::cast);
+    return resources.entrySet().stream().filter(clazz::isInstance).map(clazz::cast);
   }
 }

@@ -1,11 +1,13 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.tck.impl;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.Test;
+
 import io.annot8.common.implementations.stores.ContentStore;
 import io.annot8.common.implementations.stores.ContentStoreFactory;
 import io.annot8.testing.testimpl.TestItem;
-import org.junit.jupiter.api.Test;
 
 public abstract class AbstractContentStoreFactoryTest {
 
@@ -17,5 +19,4 @@ public abstract class AbstractContentStoreFactoryTest {
     ContentStore contentStore = getContentStoreFactory().create(item);
     assertNotNull(contentStore);
   }
-
 }

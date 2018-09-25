@@ -1,9 +1,6 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
 
-import io.annot8.core.annotations.Annotation;
-import io.annot8.core.annotations.Group;
-import io.annot8.core.properties.ImmutableProperties;
-import io.annot8.core.references.AnnotationReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,13 +8,18 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import io.annot8.core.annotations.Annotation;
+import io.annot8.core.annotations.Group;
+import io.annot8.core.properties.ImmutableProperties;
+import io.annot8.core.references.AnnotationReference;
+
 /**
  * A group implementation which provides convenience for unit testing.
  *
- * DO NOT USE THIS OUTSIDE A UNIT TEST.
+ * <p>DO NOT USE THIS OUTSIDE A UNIT TEST.
  *
- * It does not have the necessary correctness of implementation, as it stores annotation so changes
- * to the annotation will not be reflected.
+ * <p>It does not have the necessary correctness of implementation, as it stores annotation so
+ * changes to the annotation will not be reflected.
  */
 public class TestGroup implements Group {
 
@@ -43,16 +45,16 @@ public class TestGroup implements Group {
   public Map<String, Stream<AnnotationReference>> getReferences() {
     Map<String, Stream<AnnotationReference>> ret = new HashMap<>();
 
-    annotations.forEach((key, value) -> {
-      Stream<AnnotationReference> s = ret.getOrDefault(value, Stream.empty());
-      ret.put(value, Stream.concat(s, Stream.of(key)));
-    });
+    annotations.forEach(
+        (key, value) -> {
+          Stream<AnnotationReference> s = ret.getOrDefault(value, Stream.empty());
+          ret.put(value, Stream.concat(s, Stream.of(key)));
+        });
 
     return ret;
   }
 
-  public void setAnnotations(
-      Map<AnnotationReference, String> annotations) {
+  public void setAnnotations(Map<AnnotationReference, String> annotations) {
     this.annotations = annotations;
   }
 
@@ -103,10 +105,10 @@ public class TestGroup implements Group {
       return false;
     }
     TestGroup testGroup = (TestGroup) o;
-    return Objects.equals(id, testGroup.id) &&
-        Objects.equals(properties, testGroup.properties) &&
-        Objects.equals(type, testGroup.type) &&
-        Objects.equals(annotations, testGroup.annotations);
+    return Objects.equals(id, testGroup.id)
+        && Objects.equals(properties, testGroup.properties)
+        && Objects.equals(type, testGroup.type)
+        && Objects.equals(annotations, testGroup.annotations);
   }
 
   @Override

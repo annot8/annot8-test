@@ -1,17 +1,19 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
+
+import java.util.Objects;
+import java.util.UUID;
 
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.bounds.Bounds;
 import io.annot8.core.properties.ImmutableProperties;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * An annotation for use (only) in unit tests.
  *
- * DO NOT USE THIS OUTSIDE A UNIT TEST.
+ * <p>DO NOT USE THIS OUTSIDE A UNIT TEST.
  *
- * This does not have the necessary correctness of behaviour, for example is it mutable.
+ * <p>This does not have the necessary correctness of behaviour, for example is it mutable.
  */
 public class TestAnnotation implements Annotation {
 
@@ -95,11 +97,11 @@ public class TestAnnotation implements Annotation {
       return false;
     }
     TestAnnotation that = (TestAnnotation) o;
-    return Objects.equals(bounds, that.bounds) &&
-        Objects.equals(content, that.content) &&
-        Objects.equals(id, that.id) &&
-        Objects.equals(properties, that.properties) &&
-        Objects.equals(type, that.type);
+    return Objects.equals(bounds, that.bounds)
+        && Objects.equals(content, that.content)
+        && Objects.equals(id, that.id)
+        && Objects.equals(properties, that.properties)
+        && Objects.equals(type, that.type);
   }
 
   @Override

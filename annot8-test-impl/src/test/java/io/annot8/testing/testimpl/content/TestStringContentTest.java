@@ -1,3 +1,4 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl.content;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,5 +12,4 @@ public class TestStringContentTest {
     TestStringContent stringContent = new TestStringContent();
     assertEquals("Test data", stringContent.getData());
   }
-
 }

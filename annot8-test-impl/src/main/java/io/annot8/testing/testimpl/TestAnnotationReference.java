@@ -1,9 +1,11 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
+
+import java.util.Objects;
+import java.util.Optional;
 
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.references.AnnotationReference;
-import java.util.Objects;
-import java.util.Optional;
 
 public class TestAnnotationReference implements AnnotationReference {
 

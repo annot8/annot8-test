@@ -1,10 +1,13 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl.serialisation;
+
+import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
+
 import io.annot8.common.serialisation.jackson.AbstractAnnot8Serializer;
 import io.annot8.testing.testimpl.TestBounds;
-import java.io.IOException;
 
 public class TestBoundsSerializer extends AbstractAnnot8Serializer<TestBounds> {
 

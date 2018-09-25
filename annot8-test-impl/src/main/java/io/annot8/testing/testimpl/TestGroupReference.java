@@ -1,16 +1,18 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
+
+import java.util.Objects;
+import java.util.Optional;
 
 import io.annot8.core.annotations.Group;
 import io.annot8.core.references.GroupReference;
-import java.util.Objects;
-import java.util.Optional;
 
 public class TestGroupReference implements GroupReference {
 
   private Group group;
 
   public TestGroupReference(Group group) {
-    if(group == null) {
+    if (group == null) {
       throw new IllegalArgumentException("Invalid null group");
     }
     this.group = group;
@@ -27,7 +29,7 @@ public class TestGroupReference implements GroupReference {
   }
 
   public void setGroup(Group group) {
-    if(group == null) {
+    if (group == null) {
       throw new IllegalArgumentException("Invalid null group");
     }
     this.group = group;

@@ -1,3 +1,4 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
 
 public final class TestConstants {
@@ -24,4 +25,3 @@ public final class TestConstants {
     // Singleton
   }
 }
-

@@ -1,4 +1,10 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 import io.annot8.common.implementations.factories.GroupBuilderFactory;
 import io.annot8.common.implementations.stores.SaveCallback;
@@ -7,10 +13,6 @@ import io.annot8.core.annotations.Group;
 import io.annot8.core.annotations.Group.Builder;
 import io.annot8.core.properties.Properties;
 import io.annot8.core.references.AnnotationReference;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
 
 public class TestGroupBuilder implements Group.Builder {
 
@@ -20,7 +22,6 @@ public class TestGroupBuilder implements Group.Builder {
   private final TestProperties properties = new TestProperties();
   private String id = UUID.randomUUID().toString();
   private String type = TestConstants.GROUP_TYPE;
-
 
   public TestGroupBuilder(SaveCallback<Group, Group> saver) {
     this.saver = saver;
@@ -49,8 +50,10 @@ public class TestGroupBuilder implements Group.Builder {
     id = from.getId();
     type = from.getType();
     properties.add(from.getProperties().getAll());
-    from.getAnnotations().forEach(
-        (key, value) -> value.forEach(a -> annotations.put(new TestAnnotationReference(a), key)));
+    from.getAnnotations()
+        .forEach(
+            (key, value) ->
+                value.forEach(a -> annotations.put(new TestAnnotationReference(a), key)));
     return this;
   }
 

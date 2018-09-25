@@ -1,4 +1,12 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+import java.util.function.Supplier;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.annot8.common.data.content.FileContent;
 import io.annot8.common.data.content.InputStreamContent;
@@ -13,16 +21,11 @@ import io.annot8.core.properties.Properties;
 import io.annot8.testing.testimpl.content.TestFileContent;
 import io.annot8.testing.testimpl.content.TestInputStreamContent;
 import io.annot8.testing.testimpl.content.TestStringContent;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Optional;
-import java.util.function.Supplier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFactoryRegistry {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(TestContentBuilderFactoryRegistry.class);
-
+  private static final Logger LOGGER =
+      LoggerFactory.getLogger(TestContentBuilderFactoryRegistry.class);
 
   public TestContentBuilderFactoryRegistry() {
     this(true);
@@ -30,17 +33,18 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
 
   public TestContentBuilderFactoryRegistry(boolean includeDefaultContentBuilders) {
 
-    if(includeDefaultContentBuilders) {
+    if (includeDefaultContentBuilders) {
       register(Text.class, new TestStringContent.BuilderFactory());
       register(FileContent.class, new TestFileContent.BuilderFactory());
       register(InputStreamContent.class, new TestInputStreamContent.BuilderFactory());
-
     }
   }
+
   @Override
   public <D, C extends Content<D>> Optional<ContentBuilderFactory<D, C>> get(
       Class<C> contentClass) {
-    // if you specifically ask for testcontent types we get create them (without needing registration)
+    // if you specifically ask for testcontent types we get create them (without needing
+    // registration)
     if (AbstractTestContent.class.isAssignableFrom(contentClass)) {
       try {
         return Optional.of(new TestContentBuilderFactory(contentClass));
@@ -48,7 +52,6 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
         LOGGER.error("Unable to create test content", e);
       }
     }
-
 
     // Otherwise fallback to standard registry
     return super.get(contentClass);
@@ -60,12 +63,11 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
     private final C instance;
     private final Class<C> contentClass;
 
-
-    public TestContentBuilderFactory(Class<C> contentClass) throws NoSuchMethodException,
-        IllegalAccessException, InvocationTargetException, InstantiationException {
+    public TestContentBuilderFactory(Class<C> contentClass)
+        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+            InstantiationException {
       this.contentClass = contentClass;
       instance = contentClass.getConstructor().newInstance();
-
     }
 
     @Override
@@ -154,6 +156,5 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
       instance.setProperties(builderProperties);
       return saver.save(instance);
     }
-
   }
 }

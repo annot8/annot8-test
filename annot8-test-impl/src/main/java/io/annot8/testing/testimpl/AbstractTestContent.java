@@ -1,11 +1,13 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
+
+import java.util.UUID;
+import java.util.function.Supplier;
 
 import io.annot8.common.implementations.stores.AnnotationStoreFactory;
 import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.core.stores.AnnotationStore;
-import java.util.UUID;
-import java.util.function.Supplier;
 
 public abstract class AbstractTestContent<D> implements Content<D> {
 
@@ -25,14 +27,27 @@ public abstract class AbstractTestContent<D> implements Content<D> {
     this(dataClass, UUID.randomUUID().toString(), name, new TestProperties());
   }
 
-  public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties) {
-    this(dataClass, id, name, properties, (D)null);
+  public AbstractTestContent(
+      Class<D> dataClass, String id, String name, ImmutableProperties properties) {
+    this(dataClass, id, name, properties, (D) null);
   }
 
-  public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties, Supplier<D> data) {
+  public AbstractTestContent(
+      Class<D> dataClass,
+      String id,
+      String name,
+      ImmutableProperties properties,
+      Supplier<D> data) {
     this(dataClass, n -> new TestAnnotationStore(n.getId()), id, name, properties, data);
   }
-  public AbstractTestContent(Class<D> dataClass, AnnotationStoreFactory annotationStoreFactory, String id, String name, ImmutableProperties properties, Supplier<D> data) {
+
+  public AbstractTestContent(
+      Class<D> dataClass,
+      AnnotationStoreFactory annotationStoreFactory,
+      String id,
+      String name,
+      ImmutableProperties properties,
+      Supplier<D> data) {
     this.id = id;
     this.dataClass = dataClass;
     this.name = name;
@@ -42,7 +57,8 @@ public abstract class AbstractTestContent<D> implements Content<D> {
     this.annotations = annotationStoreFactory.create(this);
   }
 
-  public AbstractTestContent(Class<D> dataClass, String id, String name, ImmutableProperties properties, D data) {
+  public AbstractTestContent(
+      Class<D> dataClass, String id, String name, ImmutableProperties properties, D data) {
     this(dataClass, id, name, properties, () -> data);
   }
 
@@ -65,12 +81,11 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   }
 
   public void setData(D data) {
-    if(data == null) {
-      this.setData((Supplier<D>)null);
+    if (data == null) {
+      this.setData((Supplier<D>) null);
     } else {
       this.setData(() -> data);
     }
-
   }
 
   public void setData(Supplier<D> data) {
@@ -103,6 +118,4 @@ public abstract class AbstractTestContent<D> implements Content<D> {
   public void setProperties(ImmutableProperties properties) {
     this.properties = properties;
   }
-
-
 }

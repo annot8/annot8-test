@@ -1,4 +1,11 @@
+/* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.ContentBuilderFactoryRegistry;
@@ -12,11 +19,6 @@ import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.exceptions.UnsupportedContentException;
 import io.annot8.core.properties.MutableProperties;
 import io.annot8.core.stores.GroupStore;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Stream;
 
 public class TestItem implements Item {
 
@@ -47,20 +49,22 @@ public class TestItem implements Item {
     this(itemFactory, groupStore, new TestContentBuilderFactoryRegistry());
   }
 
-
   public TestItem(ItemFactory itemFactory, GroupStore groupStore, String parentId) {
     this(itemFactory, groupStore, new TestContentBuilderFactoryRegistry(), parentId);
   }
 
-
-  public TestItem(ItemFactory itemFactory, GroupStore groupStore,
+  public TestItem(
+      ItemFactory itemFactory,
+      GroupStore groupStore,
       ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {
     this(itemFactory, groupStore, contentBuilderFactoryRegistry, null);
   }
 
-
-  public TestItem(ItemFactory itemFactory, GroupStore groupStore,
-      ContentBuilderFactoryRegistry contentBuilderFactoryRegistry, String parentId) {
+  public TestItem(
+      ItemFactory itemFactory,
+      GroupStore groupStore,
+      ContentBuilderFactoryRegistry contentBuilderFactoryRegistry,
+      String parentId) {
     this.id = UUID.randomUUID().toString();
     this.parentId = parentId;
     this.itemFactory = itemFactory;
