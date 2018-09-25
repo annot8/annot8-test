@@ -9,3 +9,4 @@
 .sts4-cache
 annot8-test-impl/target
 annot8-impl-tck/target
+*.versionsBackup
