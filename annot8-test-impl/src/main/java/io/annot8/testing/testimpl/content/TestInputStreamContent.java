@@ -13,7 +13,6 @@ import io.annot8.common.implementations.stores.AnnotationStoreFactory;
 import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Item;
-import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.core.stores.AnnotationStore;
 import io.annot8.testing.testimpl.AbstractTestContent;
@@ -22,7 +21,7 @@ import io.annot8.testing.testimpl.TestAnnotationStoreFactory;
 public class TestInputStreamContent extends AbstractTestContent<InputStream>
     implements InputStreamContent {
 
-  public static final byte[] DEFAULT_DATA = "Test Data".getBytes(StandardCharsets.UTF_8);
+  private static final byte[] DEFAULT_DATA = "Test Data".getBytes(StandardCharsets.UTF_8);
 
   public TestInputStreamContent() {
     super(InputStream.class);

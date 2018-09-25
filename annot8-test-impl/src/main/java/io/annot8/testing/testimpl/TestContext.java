@@ -12,8 +12,8 @@ import io.annot8.core.settings.Settings;
 
 public class TestContext implements Context {
 
-  private Settings settings;
-  private Map<String, Resource> resources;
+  private final Settings settings;
+  private final Map<String, Resource> resources;
 
   public TestContext() {
     this(null, Collections.emptyMap());

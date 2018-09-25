@@ -7,7 +7,6 @@ import java.util.List;
 import io.annot8.core.components.Processor;
 import io.annot8.core.components.responses.ProcessorResponse;
 import io.annot8.core.data.Item;
-import io.annot8.core.exceptions.Annot8Exception;
 
 public class ItemCollector implements Processor {
 

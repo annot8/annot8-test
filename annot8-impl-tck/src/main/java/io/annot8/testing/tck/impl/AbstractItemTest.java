@@ -24,9 +24,6 @@ public abstract class AbstractItemTest {
   protected abstract Item getItem();
 
   @Test
-  public void testGetParent() {}
-
-  @Test
   public void testCreateChildItem() {
     Item item = getItem();
     Item childItem = item.createChildItem();
