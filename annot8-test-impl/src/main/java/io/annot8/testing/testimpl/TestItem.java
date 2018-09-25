@@ -39,9 +39,19 @@ public class TestItem implements Item {
     this(itemFactory, new TestGroupStore());
   }
 
+  public TestItem(ItemFactory itemFactory, String parentId) {
+    this(itemFactory, new TestGroupStore(), parentId);
+  }
+
   public TestItem(ItemFactory itemFactory, GroupStore groupStore) {
     this(itemFactory, groupStore, new TestContentBuilderFactoryRegistry());
   }
+
+
+  public TestItem(ItemFactory itemFactory, GroupStore groupStore, String parentId) {
+    this(itemFactory, groupStore, new TestContentBuilderFactoryRegistry(), parentId);
+  }
+
 
   public TestItem(ItemFactory itemFactory, GroupStore groupStore,
       ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {

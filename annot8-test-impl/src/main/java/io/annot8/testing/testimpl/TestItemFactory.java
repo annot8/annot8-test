@@ -12,6 +12,7 @@ public class TestItemFactory implements ItemFactory {
 
   @Override
   public Item create(Item parent) {
-    return new TestItem(this);
+    return new TestItem(this, parent.getId());
   }
+
 }
