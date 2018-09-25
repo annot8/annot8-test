@@ -16,6 +16,7 @@
 
   <name>Annot8 Testing</name>
   <description>Projects for testing Annot8 components</description>
+  <version>0.1.0</version>
 
   <issueManagement>
     <url>https://github.com/annot8/testing/issues</url>
