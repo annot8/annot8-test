@@ -13,7 +13,6 @@ import io.annot8.common.utils.java.StreamUtils;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
-import io.annot8.core.data.ItemFactory;
 import io.annot8.core.exceptions.AlreadyExistsException;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.exceptions.UnsupportedContentException;
@@ -25,7 +24,6 @@ public class TestItem implements Item {
   private final String parentId;
 
   private final String id;
-  private final ItemFactory itemFactory;
   private MutableProperties properties;
   private GroupStore groups;
   private ContentBuilderFactoryRegistry contentBuilderFactoryRegistry;
@@ -34,40 +32,32 @@ public class TestItem implements Item {
   private boolean discarded = false;
 
   public TestItem() {
-    this(null, new TestGroupStore());
+    this(new TestGroupStore());
   }
 
-  public TestItem(ItemFactory itemFactory) {
-    this(itemFactory, new TestGroupStore());
+  public TestItem(String parentId) {
+    this(new TestGroupStore(), parentId);
   }
 
-  public TestItem(ItemFactory itemFactory, String parentId) {
-    this(itemFactory, new TestGroupStore(), parentId);
+  public TestItem(GroupStore groupStore) {
+    this(groupStore, new TestContentBuilderFactoryRegistry());
   }
 
-  public TestItem(ItemFactory itemFactory, GroupStore groupStore) {
-    this(itemFactory, groupStore, new TestContentBuilderFactoryRegistry());
-  }
-
-  public TestItem(ItemFactory itemFactory, GroupStore groupStore, String parentId) {
-    this(itemFactory, groupStore, new TestContentBuilderFactoryRegistry(), parentId);
+  public TestItem(GroupStore groupStore, String parentId) {
+    this(groupStore, new TestContentBuilderFactoryRegistry(), parentId);
   }
 
   public TestItem(
-      ItemFactory itemFactory,
-      GroupStore groupStore,
-      ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {
-    this(itemFactory, groupStore, contentBuilderFactoryRegistry, null);
+      GroupStore groupStore, ContentBuilderFactoryRegistry contentBuilderFactoryRegistry) {
+    this(groupStore, contentBuilderFactoryRegistry, null);
   }
 
   public TestItem(
-      ItemFactory itemFactory,
       GroupStore groupStore,
       ContentBuilderFactoryRegistry contentBuilderFactoryRegistry,
       String parentId) {
     this.id = UUID.randomUUID().toString();
     this.parentId = parentId;
-    this.itemFactory = itemFactory;
     this.properties = new TestProperties();
     this.groups = groupStore;
     this.contentBuilderFactoryRegistry = contentBuilderFactoryRegistry;
@@ -174,14 +164,6 @@ public class TestItem implements Item {
 
   public void setContent(Map<String, Content<?>> content) {
     this.content = content;
-  }
-
-  @Override
-  public Item createChildItem() {
-    if (itemFactory == null) {
-      throw new UnsupportedOperationException();
-    }
-    return itemFactory.create(this);
   }
 
   @Override
