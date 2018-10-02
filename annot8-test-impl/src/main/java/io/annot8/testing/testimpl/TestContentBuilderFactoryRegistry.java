@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import io.annot8.common.data.content.FileContent;
 import io.annot8.common.data.content.InputStreamContent;
 import io.annot8.common.data.content.Text;
+import io.annot8.common.data.content.URLContent;
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.SimpleContentBuilderFactoryRegistry;
 import io.annot8.common.implementations.stores.SaveCallback;
@@ -21,6 +22,7 @@ import io.annot8.core.properties.Properties;
 import io.annot8.testing.testimpl.content.TestFileContent;
 import io.annot8.testing.testimpl.content.TestInputStreamContent;
 import io.annot8.testing.testimpl.content.TestStringContent;
+import io.annot8.testing.testimpl.content.TestURLContent.TestURLBuilderFactory;
 
 public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFactoryRegistry {
 
@@ -37,6 +39,7 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
       register(Text.class, new TestStringContent.BuilderFactory());
       register(FileContent.class, new TestFileContent.BuilderFactory());
       register(InputStreamContent.class, new TestInputStreamContent.BuilderFactory());
+      register(URLContent.class, new TestURLBuilderFactory());
     }
   }
 
