@@ -24,15 +24,6 @@ public abstract class AbstractItemTest {
   protected abstract Item getItem();
 
   @Test
-  public void testCreateChildItem() {
-    Item item = getItem();
-    Item childItem = item.createChildItem();
-    assertNotNull(childItem);
-    assertTrue(childItem.hasParent());
-    assertEquals(item.getId(), childItem.getParent().get());
-  }
-
-  @Test
   public void testGetContent() {
     Item item = getItem();
     try {
