@@ -99,7 +99,7 @@ public class TestItem implements Item {
   }
 
   public Optional<String> getParent() {
-    return Optional.of(parentId);
+    return Optional.ofNullable(parentId);
   }
 
   @Override
