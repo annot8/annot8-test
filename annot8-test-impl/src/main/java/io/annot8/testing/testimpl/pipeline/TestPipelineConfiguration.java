@@ -4,8 +4,8 @@ package io.annot8.testing.testimpl.pipeline;
 import java.util.Collection;
 import java.util.Collections;
 
-import io.annot8.common.pipelines.configuration.ComponentConfiguration;
-import io.annot8.common.pipelines.configuration.PipelineConfiguration;
+import io.annot8.common.pipelines.creation.configuration.ComponentConfiguration;
+import io.annot8.common.pipelines.creation.configuration.PipelineConfiguration;
 
 public class TestPipelineConfiguration implements PipelineConfiguration {
 
