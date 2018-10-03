@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.annot8.common.implementations.pipelines.configuration.ComponentConfiguration;
+import io.annot8.common.pipelines.configuration.ComponentConfiguration;
 import io.annot8.core.settings.Settings;
 
 public class TestPipelineComponentConfiguration implements ComponentConfiguration {
