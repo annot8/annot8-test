@@ -1,11 +1,10 @@
 /* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl.pipeline;
 
+import io.annot8.common.pipelines.factory.configuration.ComponentConfiguration;
+import io.annot8.common.pipelines.factory.configuration.PipelineConfiguration;
 import java.util.Collection;
 import java.util.Collections;
-
-import io.annot8.common.pipelines.creation.configuration.ComponentConfiguration;
-import io.annot8.common.pipelines.creation.configuration.PipelineConfiguration;
 
 public class TestPipelineConfiguration implements PipelineConfiguration {
 
