@@ -13,16 +13,9 @@ public class TestItemFactory implements ItemFactory {
 
   @Override
   public Item create() {
-    TestItem i = new TestItem();
-    createdItems.add(i);
-    return i;
-  }
-
-  @Override
-  public Item create(Item parent) {
-    TestItem i = new TestItem(parent.getId());
-    createdItems.add(i);
-    return i;
+    Item item = new TestItem();
+    createdItems.add(item);
+    return item;
   }
 
   public List<Item> getCreatedItems() {

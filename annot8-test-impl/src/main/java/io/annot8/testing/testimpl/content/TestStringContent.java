@@ -8,8 +8,8 @@ import io.annot8.common.implementations.content.AbstractContentBuilder;
 import io.annot8.common.implementations.content.AbstractContentBuilderFactory;
 import io.annot8.common.implementations.stores.AnnotationStoreFactory;
 import io.annot8.common.implementations.stores.SaveCallback;
+import io.annot8.core.data.BaseItem;
 import io.annot8.core.data.Content;
-import io.annot8.core.data.Item;
 import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.core.stores.AnnotationStore;
 import io.annot8.testing.testimpl.AbstractTestContent;
@@ -83,7 +83,7 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
     }
 
     @Override
-    public Builder create(Item item, SaveCallback<TestStringContent, TestStringContent> saver) {
+    public Builder create(BaseItem item, SaveCallback<TestStringContent, TestStringContent> saver) {
       return new Builder(annotationStoreFactory, saver);
     }
   }
