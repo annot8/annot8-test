@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import io.annot8.common.implementations.factories.GroupBuilderFactory;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.annotations.Group.Builder;
-import io.annot8.core.data.Item;
+import io.annot8.core.data.BaseItem;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.stores.GroupStore;
 
@@ -17,26 +17,26 @@ public class TestGroupStore implements GroupStore {
 
   private final Map<String, Group> groups = new ConcurrentHashMap<>();
   private final GroupBuilderFactory<Group> groupBuilderFactory;
-  private Item item;
+  private BaseItem item;
 
   public TestGroupStore() {
     this(null);
   }
 
-  public TestGroupStore(Item item, GroupBuilderFactory<Group> groupBuilderFactory) {
+  public TestGroupStore(BaseItem item, GroupBuilderFactory<Group> groupBuilderFactory) {
     this.item = item;
     this.groupBuilderFactory = groupBuilderFactory;
   }
 
-  public TestGroupStore(Item item) {
+  public TestGroupStore(BaseItem item) {
     this(item, TestGroupBuilder.factory());
   }
 
-  public void setItem(Item item) {
+  public void setItem(BaseItem item) {
     this.item = item;
   }
 
-  public Item getItem() {
+  public BaseItem getItem() {
     return item;
   }
 
