@@ -10,7 +10,6 @@ import io.annot8.common.data.content.InputStreamContent;
 import io.annot8.common.implementations.content.AbstractContentBuilder;
 import io.annot8.common.implementations.content.AbstractContentBuilderFactory;
 import io.annot8.common.implementations.stores.AnnotationStoreFactory;
-import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.data.BaseItem;
 import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
@@ -61,10 +60,7 @@ public class TestInputStreamContent extends AbstractTestContent<InputStream>
 
     private final AnnotationStoreFactory annotationStoreFactory;
 
-    public Builder(
-        AnnotationStoreFactory annotationStoreFactory,
-        SaveCallback<TestInputStreamContent, TestInputStreamContent> saver) {
-      super(saver);
+    public Builder(AnnotationStoreFactory annotationStoreFactory) {
       this.annotationStoreFactory = annotationStoreFactory;
     }
 
@@ -90,9 +86,8 @@ public class TestInputStreamContent extends AbstractTestContent<InputStream>
     }
 
     @Override
-    public TestInputStreamContent.Builder create(
-        BaseItem item, SaveCallback<TestInputStreamContent, TestInputStreamContent> saver) {
-      return new TestInputStreamContent.Builder(annotationStoreFactory, saver);
+    public TestInputStreamContent.Builder create(BaseItem item) {
+      return new TestInputStreamContent.Builder(annotationStoreFactory);
     }
   }
 }

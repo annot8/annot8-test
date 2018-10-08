@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
+import io.annot8.common.implementations.delegates.DelegateAnnotationBuilder;
 import io.annot8.common.implementations.factories.AnnotationBuilderFactory;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Annotation.Builder;
@@ -39,7 +40,12 @@ public class TestAnnotationStore implements AnnotationStore {
 
   @Override
   public Builder getBuilder() {
-    return annotationBuilderFactory.create(contentId, this, this::save);
+    return new DelegateAnnotationBuilder(annotationBuilderFactory.create(contentId, this)) {
+      @Override
+      public Annotation save() throws IncompleteException {
+        return TestAnnotationStore.this.save(super.save());
+      }
+    };
   }
 
   public void setContentId(String contentName) {

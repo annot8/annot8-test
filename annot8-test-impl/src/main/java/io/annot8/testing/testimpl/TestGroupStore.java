@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
+import io.annot8.common.implementations.delegates.DelegateGroupBuilder;
 import io.annot8.common.implementations.factories.GroupBuilderFactory;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.annotations.Group.Builder;
@@ -42,7 +43,12 @@ public class TestGroupStore implements GroupStore {
 
   @Override
   public Builder getBuilder() {
-    return groupBuilderFactory.create(item, this, this::save);
+    return new DelegateGroupBuilder(groupBuilderFactory.create(item, this)) {
+      @Override
+      public Group save() throws IncompleteException {
+        return TestGroupStore.this.save(super.save());
+      }
+    };
   }
 
   public Group save(Builder groupBuilder) throws IncompleteException {

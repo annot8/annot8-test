@@ -14,7 +14,6 @@ import io.annot8.common.data.content.Text;
 import io.annot8.common.data.content.URLContent;
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.SimpleContentBuilderFactoryRegistry;
-import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.data.BaseItem;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
@@ -74,8 +73,8 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
     }
 
     @Override
-    public Content.Builder<C, D> create(BaseItem item, SaveCallback<C, C> saver) {
-      return new TestContentBuilder(instance, saver);
+    public Content.Builder<C, D> create(BaseItem item) {
+      return new TestContentBuilder(instance);
     }
 
     @Override
@@ -93,12 +92,10 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
       implements Content.Builder<C, D> {
 
     private final C instance;
-    private final SaveCallback<C, C> saver;
     private final TestProperties builderProperties = new TestProperties();
 
-    public TestContentBuilder(C instance, SaveCallback<C, C> saver) {
+    public TestContentBuilder(C instance) {
       this.instance = instance;
-      this.saver = saver;
     }
 
     @Override
@@ -157,7 +154,7 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
     @Override
     public C save() {
       instance.setProperties(builderProperties);
-      return saver.save(instance);
+      return instance;
     }
   }
 }

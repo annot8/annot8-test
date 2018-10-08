@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import io.annot8.common.implementations.factories.GroupBuilderFactory;
-import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.annotations.Annotation;
 import io.annot8.core.annotations.Group;
 import io.annot8.core.annotations.Group.Builder;
@@ -16,19 +15,13 @@ import io.annot8.core.references.AnnotationReference;
 
 public class TestGroupBuilder implements Group.Builder {
 
-  private final SaveCallback<Group, Group> saver;
-
   private final Map<AnnotationReference, String> annotations = new HashMap<>();
   private final TestProperties properties = new TestProperties();
   private String id = UUID.randomUUID().toString();
   private String type = TestConstants.GROUP_TYPE;
 
-  public TestGroupBuilder(SaveCallback<Group, Group> saver) {
-    this.saver = saver;
-  }
-
   public static GroupBuilderFactory<Group> factory() {
-    return (item, store, saver) -> new TestGroupBuilder(saver);
+    return (item, store) -> new TestGroupBuilder();
   }
 
   @Override
@@ -42,7 +35,7 @@ public class TestGroupBuilder implements Group.Builder {
     TestGroup group = new TestGroup(id, type);
     group.setProperties(properties);
     group.setAnnotations(annotations);
-    return saver.save(group);
+    return group;
   }
 
   @Override
