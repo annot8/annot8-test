@@ -13,6 +13,7 @@ import io.annot8.common.utils.java.StreamUtils;
 import io.annot8.core.data.Content;
 import io.annot8.core.data.Content.Builder;
 import io.annot8.core.data.Item;
+import io.annot8.core.data.ItemFactory;
 import io.annot8.core.exceptions.AlreadyExistsException;
 import io.annot8.core.exceptions.IncompleteException;
 import io.annot8.core.exceptions.UnsupportedContentException;
@@ -30,6 +31,8 @@ public class TestItem implements Item {
   private Map<String, Content<?>> content = new ConcurrentHashMap<>();
 
   private boolean discarded = false;
+
+  private ItemFactory itemFactory;
 
   public TestItem() {
     this(new TestGroupStore());
@@ -56,6 +59,15 @@ public class TestItem implements Item {
       GroupStore groupStore,
       ContentBuilderFactoryRegistry contentBuilderFactoryRegistry,
       String parentId) {
+    this(new TestItemFactory(), groupStore, contentBuilderFactoryRegistry, parentId);
+  }
+
+  public TestItem(
+      ItemFactory itemFactory,
+      GroupStore groupStore,
+      ContentBuilderFactoryRegistry contentBuilderFactoryRegistry,
+      String parentId) {
+    this.itemFactory = itemFactory;
     this.id = UUID.randomUUID().toString();
     this.parentId = parentId;
     this.properties = new TestProperties();
@@ -174,5 +186,14 @@ public class TestItem implements Item {
   @Override
   public boolean isDiscarded() {
     return discarded;
+  }
+
+  @Override
+  public Item create() {
+    return itemFactory == null ? null : itemFactory.create();
+  }
+
+  public ItemFactory getItemFactory() {
+    return itemFactory;
   }
 }

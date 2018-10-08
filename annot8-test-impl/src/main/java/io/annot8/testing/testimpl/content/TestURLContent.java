@@ -8,8 +8,8 @@ import io.annot8.common.data.content.URLContent;
 import io.annot8.common.implementations.content.AbstractContentBuilder;
 import io.annot8.common.implementations.content.AbstractContentBuilderFactory;
 import io.annot8.common.implementations.stores.SaveCallback;
+import io.annot8.core.data.BaseItem;
 import io.annot8.core.data.Content;
-import io.annot8.core.data.Item;
 import io.annot8.core.properties.ImmutableProperties;
 import io.annot8.core.stores.AnnotationStore;
 import io.annot8.testing.testimpl.TestAnnotationStore;
@@ -85,7 +85,8 @@ public class TestURLContent implements URLContent {
     }
 
     @Override
-    public Builder<URLContent, URL> create(Item item, SaveCallback<URLContent, URLContent> saver) {
+    public Builder<URLContent, URL> create(
+        BaseItem item, SaveCallback<URLContent, URLContent> saver) {
       return new TestURLBuilder(saver);
     }
   }
