@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 import io.annot8.common.data.content.URLContent;
 import io.annot8.common.implementations.content.AbstractContentBuilder;
 import io.annot8.common.implementations.content.AbstractContentBuilderFactory;
-import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.data.BaseItem;
 import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
@@ -67,10 +66,6 @@ public class TestURLContent implements URLContent {
 
   public static class TestURLBuilder extends AbstractContentBuilder<URL, URLContent> {
 
-    public TestURLBuilder(SaveCallback<URLContent, URLContent> callback) {
-      super(callback);
-    }
-
     @Override
     protected URLContent create(
         String id, String name, ImmutableProperties properties, Supplier<URL> data) {
@@ -85,9 +80,8 @@ public class TestURLContent implements URLContent {
     }
 
     @Override
-    public Builder<URLContent, URL> create(
-        BaseItem item, SaveCallback<URLContent, URLContent> saver) {
-      return new TestURLBuilder(saver);
+    public Builder<URLContent, URL> create(BaseItem item) {
+      return new TestURLBuilder();
     }
   }
 }

@@ -7,7 +7,6 @@ import io.annot8.common.data.content.Text;
 import io.annot8.common.implementations.content.AbstractContentBuilder;
 import io.annot8.common.implementations.content.AbstractContentBuilderFactory;
 import io.annot8.common.implementations.stores.AnnotationStoreFactory;
-import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.data.BaseItem;
 import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
@@ -54,10 +53,7 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
 
     private final AnnotationStoreFactory annotationStoreFactory;
 
-    public Builder(
-        AnnotationStoreFactory annotationStoreFactory,
-        SaveCallback<TestStringContent, TestStringContent> saver) {
-      super(saver);
+    public Builder(AnnotationStoreFactory annotationStoreFactory) {
       this.annotationStoreFactory = annotationStoreFactory;
     }
 
@@ -83,8 +79,8 @@ public class TestStringContent extends AbstractTestContent<String> implements Te
     }
 
     @Override
-    public Builder create(BaseItem item, SaveCallback<TestStringContent, TestStringContent> saver) {
-      return new Builder(annotationStoreFactory, saver);
+    public Builder create(BaseItem item) {
+      return new Builder(annotationStoreFactory);
     }
   }
 }

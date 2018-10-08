@@ -8,7 +8,6 @@ import io.annot8.common.data.content.FileContent;
 import io.annot8.common.implementations.content.AbstractContentBuilder;
 import io.annot8.common.implementations.content.AbstractContentBuilderFactory;
 import io.annot8.common.implementations.stores.AnnotationStoreFactory;
-import io.annot8.common.implementations.stores.SaveCallback;
 import io.annot8.core.data.BaseItem;
 import io.annot8.core.data.Content;
 import io.annot8.core.properties.ImmutableProperties;
@@ -55,10 +54,7 @@ public class TestFileContent extends AbstractTestContent<File> implements FileCo
 
     private final AnnotationStoreFactory annotationStoreFactory;
 
-    public Builder(
-        AnnotationStoreFactory annotationStoreFactory,
-        SaveCallback<TestFileContent, TestFileContent> saver) {
-      super(saver);
+    public Builder(AnnotationStoreFactory annotationStoreFactory) {
       this.annotationStoreFactory = annotationStoreFactory;
     }
 
@@ -83,9 +79,8 @@ public class TestFileContent extends AbstractTestContent<File> implements FileCo
     }
 
     @Override
-    public TestFileContent.Builder create(
-        BaseItem item, SaveCallback<TestFileContent, TestFileContent> saver) {
-      return new TestFileContent.Builder(annotationStoreFactory, saver);
+    public TestFileContent.Builder create(BaseItem item) {
+      return new TestFileContent.Builder(annotationStoreFactory);
     }
   }
 }

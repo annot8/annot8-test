@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
+import io.annot8.common.implementations.delegates.DelegateContentBuilder;
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.ContentBuilderFactoryRegistry;
 import io.annot8.common.utils.java.StreamUtils;
@@ -115,7 +116,12 @@ public class TestItem implements Item {
 
     ContentBuilderFactory<D, C> factory = optional.get();
 
-    return factory.create(this, this::save);
+    return new DelegateContentBuilder<C, D>(factory.create(this)) {
+      @Override
+      public C save() throws IncompleteException {
+        return TestItem.this.save(super.save());
+      }
+    };
   }
 
   public <C extends Content<D>, D> C save(Builder<C, D> builder) throws AlreadyExistsException {
