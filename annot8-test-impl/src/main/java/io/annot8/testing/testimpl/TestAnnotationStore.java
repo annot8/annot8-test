@@ -17,7 +17,7 @@ import io.annot8.core.stores.AnnotationStore;
 public class TestAnnotationStore implements AnnotationStore {
 
   private final Map<String, Annotation> annotations = new ConcurrentHashMap<>();
-  private final AnnotationBuilderFactory<Annotation> annotationBuilderFactory;
+  private final AnnotationBuilderFactory annotationBuilderFactory;
   private String contentId;
 
   public TestAnnotationStore() {
@@ -29,7 +29,7 @@ public class TestAnnotationStore implements AnnotationStore {
   }
 
   public TestAnnotationStore(
-      String contentId, AnnotationBuilderFactory<Annotation> annotationBuilderFactory) {
+      String contentId, AnnotationBuilderFactory annotationBuilderFactory) {
     this.contentId = contentId;
     this.annotationBuilderFactory = annotationBuilderFactory;
   }
