@@ -23,7 +23,7 @@ public class TestAnnotationBuilder implements Annotation.Builder {
     this.contentId = contentId;
   }
 
-  public static AnnotationBuilderFactory<Annotation> factory() {
+  public static AnnotationBuilderFactory factory() {
     return (content, store) -> new TestAnnotationBuilder(content);
   }
 
