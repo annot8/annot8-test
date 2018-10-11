@@ -28,8 +28,7 @@ public class TestAnnotationStore implements AnnotationStore {
     this(contentId, TestAnnotationBuilder.factory());
   }
 
-  public TestAnnotationStore(
-      String contentId, AnnotationBuilderFactory annotationBuilderFactory) {
+  public TestAnnotationStore(String contentId, AnnotationBuilderFactory annotationBuilderFactory) {
     this.contentId = contentId;
     this.annotationBuilderFactory = annotationBuilderFactory;
   }
