@@ -1,6 +1,13 @@
 /* Annot8 (annot8.io) - Licensed under Apache-2.0. */
 package io.annot8.testing.testimpl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+import java.util.function.Supplier;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.annot8.common.data.content.FileContent;
 import io.annot8.common.data.content.InputStreamContent;
 import io.annot8.common.data.content.TableContent;
@@ -15,13 +22,8 @@ import io.annot8.core.properties.Properties;
 import io.annot8.testing.testimpl.content.TestFileContent;
 import io.annot8.testing.testimpl.content.TestInputStreamContent;
 import io.annot8.testing.testimpl.content.TestStringContent;
-import io.annot8.testing.testimpl.content.TestURLContent.TestURLBuilderFactory;
 import io.annot8.testing.testimpl.content.TestTableContent;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Optional;
-import java.util.function.Supplier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.annot8.testing.testimpl.content.TestURLContent.TestURLBuilderFactory;
 
 public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFactoryRegistry {
 
