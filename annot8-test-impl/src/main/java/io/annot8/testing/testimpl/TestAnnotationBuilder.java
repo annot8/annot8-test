@@ -78,6 +78,12 @@ public class TestAnnotationBuilder implements Annotation.Builder {
   }
 
   @Override
+  public Builder withPropertyIfPresent(String key, Optional<?> value) {
+    value.ifPresent(o -> properties.set(key, o));
+    return this;
+  }
+
+  @Override
   public Builder withoutProperty(String key, Object value) {
     Optional<Object> opt = this.properties.get(key);
     if (opt.isPresent() && opt.get().equals(value)) {

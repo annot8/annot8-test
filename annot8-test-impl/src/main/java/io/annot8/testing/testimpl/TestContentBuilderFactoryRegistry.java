@@ -8,11 +8,7 @@ import java.util.function.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.annot8.common.data.content.FileContent;
-import io.annot8.common.data.content.InputStreamContent;
-import io.annot8.common.data.content.TableContent;
-import io.annot8.common.data.content.Text;
-import io.annot8.common.data.content.UriContent;
+import io.annot8.common.data.content.*;
 import io.annot8.common.implementations.factories.ContentBuilderFactory;
 import io.annot8.common.implementations.registries.SimpleContentBuilderFactoryRegistry;
 import io.annot8.core.data.BaseItem;
@@ -128,6 +124,12 @@ public class TestContentBuilderFactoryRegistry extends SimpleContentBuilderFacto
     @Override
     public Builder<C, D> withProperty(String key, Object value) {
       builderProperties.set(key, value);
+      return this;
+    }
+
+    @Override
+    public Builder<C, D> withPropertyIfPresent(String key, Optional<?> value) {
+      value.ifPresent(o -> builderProperties.set(key, o));
       return this;
     }
 
